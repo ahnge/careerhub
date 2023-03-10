@@ -3,7 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Employer;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\JobPosting;
+use App\Models\JobSeeker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +17,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $admin = User::factory()
+            ->has(JobPosting::factory()->count(10))
+            ->state([
+                'name' => 'admin',
+                'email' => 'a@a.com',
+                'type' => 'employer'
+            ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Employer::factory()
+            ->count(1)
+            ->for($admin)
+            ->create();
+
+        $admin1 = User::factory()
+            ->has(JobPosting::factory()->count(10))
+            ->state([
+                'name' => 'admin1',
+                'email' => 'b@b.com',
+                'type' => 'employer'
+            ]);
+
+        Employer::factory()
+            ->count(1)
+            ->for($admin1)
+            ->create();
+
+        JobSeeker::factory()
+            ->count(1)
+            ->for(User::factory()->state([
+                'name' => 'luke',
+                'email' => 'l@l.com',
+                'type' => 'job_seeker'
+            ]))
+            ->create();
     }
 }

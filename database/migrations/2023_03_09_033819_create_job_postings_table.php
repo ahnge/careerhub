@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('job_postings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employer_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('description');
             $table->string('location');
             $table->decimal('salary', 8, 2);
             $table->timestamps();
 
-            $table->foreign('employer_id')->references('id')->on('employers');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

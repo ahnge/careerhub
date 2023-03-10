@@ -17,7 +17,10 @@ class JobPostingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->name(),
+            'description' => fake()->text(200),
+            'location' => 'Yangon',
+            'salary' => fake()->numberBetween(400000, 2000000),
         ];
     }
 }

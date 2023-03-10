@@ -9,7 +9,7 @@ class JobPosting extends Model
 {
     use HasFactory;
 
-    public function employer()
+    public function user()
     {
         return $this->belongsTo(Employer::class);
     }
