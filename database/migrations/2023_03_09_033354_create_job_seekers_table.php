@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_seekers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->string('resume');
+            $table->string('resume')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
