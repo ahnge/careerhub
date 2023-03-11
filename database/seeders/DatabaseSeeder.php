@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $location = Location::factory();
 
         $admin = User::factory()
-            ->has(JobPosting::factory()->has($location)->count(10))
+            ->has(JobPosting::factory()->for($location)->count(10))
             ->state([
                 'name' => 'admin',
                 'email' => 'a@a.com',
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $admin1 = User::factory()
-            ->has(JobPosting::factory()->has($location)->count(10))
+            ->has(JobPosting::factory()->for($location)->count(10))
             ->state([
                 'name' => 'admin1',
                 'email' => 'b@b.com',
