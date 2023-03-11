@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('jobposting');
-})->name('jobposting');
+    return redirect()->route('jobposting');
+});
+
+Route::get('/jobpostings', [JobPostingController::class, 'index'])->name('jobposting');
 
 
 Route::middleware('auth')->group(function () {
