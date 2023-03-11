@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobPosting;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class JobPostingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         //
-        return view('jobposting');
+        return view('jobposting', [
+            'jobs' => JobPosting::all()
+        ]);
     }
 
     /**
