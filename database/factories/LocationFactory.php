@@ -16,8 +16,6 @@ class LocationFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => 'Yangon',
-        ];
+        return [];
     }
 }
