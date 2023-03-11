@@ -13,4 +13,9 @@ class JobPosting extends Model
     {
         return $this->belongsTo(Employer::class);
     }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
 }

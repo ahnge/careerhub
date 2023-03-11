@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\JobPosting;
 use App\Models\JobSeeker;
+use App\Models\Location;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,8 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $location = Location::factory();
+
         $admin = User::factory()
-            ->has(JobPosting::factory()->count(10))
+            ->has(JobPosting::factory()->has($location)->count(10))
             ->state([
                 'name' => 'admin',
                 'email' => 'a@a.com',
@@ -31,7 +34,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $admin1 = User::factory()
-            ->has(JobPosting::factory()->count(10))
+            ->has(JobPosting::factory()->has($location)->count(10))
             ->state([
                 'name' => 'admin1',
                 'email' => 'b@b.com',
