@@ -15,6 +15,11 @@ module.exports = {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                success: "#4ade80",
+                error: "#f87171",
+                warning: "#facc15",
+            },
         },
     },
 

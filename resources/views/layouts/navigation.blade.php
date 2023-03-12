@@ -5,14 +5,14 @@
       <div class="flex">
         <!-- Logo -->
         <div class="flex items-center shrink-0">
-          <a href="{{ route('jobposting') }}">
+          <a href="{{ route('jobpostings.index') }}">
             <x-application-logo class="block w-auto text-gray-800 fill-current h-9" />
           </a>
         </div>
 
         <!-- Navigation Links -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('jobposting')" :active="request()->routeIs('jobposting')">
+          <x-nav-link :href="route('jobpostings.index')" :active="request()->routeIs('jobpostings.index')">
             {{ __('Job Posting') }}
           </x-nav-link>
         </div>
@@ -41,6 +41,11 @@
               <x-dropdown-link :href="route('profile.edit')">
                 {{ __('Profile') }}
               </x-dropdown-link>
+              @if (auth()->user()->type == 'employer')
+                <x-dropdown-link :href="route('jobpostings.create')">
+                  {{ __('Create Jobposting') }}
+                </x-dropdown-link>
+              @endif
 
               <!-- Authentication -->
               <form method="POST" action="{{ route('logout') }}">
@@ -83,7 +88,7 @@
   <!-- Responsive Navigation Menu -->
   <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('jobposting')" :active="request()->routeIs('jobposting')">
+      <x-responsive-nav-link :href="route('jobpostings.index')" :active="request()->routeIs('jobpostings.index')">
         {{ __('Job Postings') }}
       </x-responsive-nav-link>
     </div>
@@ -100,6 +105,11 @@
           <x-responsive-nav-link :href="route('profile.edit')">
             {{ __('Profile') }}
           </x-responsive-nav-link>
+          @if (auth()->user()->type == 'employer')
+            <x-responsive-nav-link :href="route('jobpostings.create')">
+              {{ __('Create Jobposting') }}
+            </x-responsive-nav-link>
+          @endif
 
           <!-- Authentication -->
           <form method="POST" action="{{ route('logout') }}">

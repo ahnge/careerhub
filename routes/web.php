@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('jobposting');
+    return redirect()->route('jobpostings.index');
 });
 
-Route::get('/jobpostings', [JobPostingController::class, 'index'])->name('jobposting');
+Route::resource('jobpostings', JobPostingController::class);
 
 
 Route::middleware('auth')->group(function () {

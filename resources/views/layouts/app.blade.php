@@ -16,7 +16,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans text-gray-900 antialiased">
   <div class="min-h-screen bg-gray-100">
     @include('layouts.navigation')
 
@@ -27,6 +27,10 @@
           {{ $header }}
         </div>
       </header>
+    @endif
+
+    @if (session('flash'))
+      <x-flash :status="session('status')" :flash="session('flash')" />
     @endif
 
     <!-- Page Content -->

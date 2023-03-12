@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('requirements');
             $table->enum('type', ['remote', 'on_site']);
             $table->enum('time', ['full_time', 'part_time']);
-            $table->decimal('salary', 8, 2);
+            $table->decimal('salary', 8, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
