@@ -27,6 +27,9 @@
           </div>
         @endforeach
       </div>
+      <div class="mt-10">
+        {{ $jobPostings->links() }}
+      </div>
     </div>
   </div>
 
