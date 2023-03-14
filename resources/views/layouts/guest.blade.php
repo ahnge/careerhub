@@ -16,17 +16,34 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-  <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 px-5 sm:pt-0 bg-gray-100">
-    <div>
-      <a href="/">
-        <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-      </a>
-    </div>
+<body class="font-sans antialiased text-gray-900">
+  <div class="min-h-screen bg-gray-100">
+    @include('layouts.navigation')
 
-    <div class="w-full sm:max-w-md mt-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg px-6">
+    <!-- Page Heading -->
+    @if (isset($header))
+      <header class="bg-white shadow">
+        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          {{ $header }}
+        </div>
+      </header>
+    @endif
+
+    @if (session('flash'))
+      <x-flash :status="session('status')" :flash="session('flash')" />
+    @endif
+
+    <!-- Page Content -->
+    <main>
       {{ $slot }}
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <span class="text-gray-500">&copy; {{ date('Y') }} {{ config('app.name') }}</span>
+      </div>
+    </footer>
   </div>
 </body>
 

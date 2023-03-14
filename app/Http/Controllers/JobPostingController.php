@@ -17,7 +17,7 @@ class JobPostingController extends Controller
     public function index(): View
     {
         return view('job_postings.jobpostings', [
-            'jobPostings' => JobPosting::paginate(5)
+            'jobPostings' => JobPosting::with('location')->paginate(5)
         ]);
     }
 
