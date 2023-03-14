@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('salary', 8, 2)->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('location_id')->references('id')->on('locations');
         });
     }
