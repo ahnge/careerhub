@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\JobPostingController;
+use App\Http\Controllers\JobSeeker;
+use App\Http\Controllers\JobSeekerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\JobPosting;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,7 @@ Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employ
 
 Route::resource('jobpostings', JobPostingController::class);
 
+Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'index'])->name('jobseeker.profile');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
