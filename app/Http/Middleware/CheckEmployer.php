@@ -15,7 +15,10 @@ class CheckEmployer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->account_type !== 'employer') {
+        if (!$request->user()) {
+            abort(403, 'Unauthorized action.');
+        }
+        if ($request->user() && $request->user()->type !== 'employer') {
             abort(403, 'Unauthorized action.');
         }
 

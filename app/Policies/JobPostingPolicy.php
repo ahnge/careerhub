@@ -7,12 +7,15 @@ use App\Models\User;
 
 class JobPostingPolicy
 {
+    public function before(User $user)
+    {
+        return $user->type === 'employer';
+    }
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        //
         return true;
     }
 
@@ -21,7 +24,6 @@ class JobPostingPolicy
      */
     public function view(User $user, JobPosting $jobPosting): bool
     {
-        //
         return true;
     }
 
@@ -40,7 +42,7 @@ class JobPostingPolicy
     public function update(User $user, JobPosting $jobPosting): bool
     {
         //
-        return true;
+        return $user->id === $jobPosting->user_id;
     }
 
     /**
@@ -49,7 +51,7 @@ class JobPostingPolicy
     public function delete(User $user, JobPosting $jobPosting): bool
     {
         //
-        return true;
+        return $user->id === $jobPosting->user_id;
     }
 
     /**
@@ -58,7 +60,7 @@ class JobPostingPolicy
     public function restore(User $user, JobPosting $jobPosting): bool
     {
         //
-        return true;
+        return $user->id === $jobPosting->user_id;
     }
 
     /**
@@ -67,6 +69,6 @@ class JobPostingPolicy
     public function forceDelete(User $user, JobPosting $jobPosting): bool
     {
         //
-        return true;
+        return $user->id === $jobPosting->user_id;
     }
 }

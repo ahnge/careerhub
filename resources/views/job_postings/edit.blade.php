@@ -5,12 +5,13 @@
     {{-- Form wrapper --}}
     <div class="w-full px-6 py-4 my-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
 
-      <form method="POST" action="{{ route('jobpostings.store') }}">
+      <form method="POST" action="{{ route('jobpostings.update', $jobPosting->id) }}">
+        @method('PUT')
         @csrf
         <div class="mb-4">
           <x-input-label for="title" :value="__('Job Title')" />
           <x-text-input id="title" class="block w-full mt-1" type="text" name="title" :value="old('title')" required
-            autofocus autocomplete="title" />
+            autofocus autocomplete="title" value="{{ $jobPosting->title }}" />
           <x-input-error :messages="$errors->get('title')" class="mt-2" />
         </div>
         <div class="mb-4">
@@ -19,7 +20,7 @@
           </label>
           <textarea
             class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            id="description" name="description" rows="5" placeholder="Enter job description"></textarea>
+            id="description" name="description" rows="5" placeholder="Enter job description">{{ $jobPosting->description }}</textarea>
           <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
         <div class="mb-4">
@@ -28,7 +29,7 @@
           </label>
           <textarea
             class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            id="requirements" name="requirements" rows="5" placeholder="Enter job requirements"></textarea>
+            id="requirements" name="requirements" rows="5" placeholder="Enter job requirements">{{ $jobPosting->requirements }}</textarea>
           <x-input-error :messages="$errors->get('requirements')" class="mt-2" />
         </div>
         <div class="mb-4">
@@ -79,7 +80,8 @@
           </label>
           <input
             class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            id="location" name="location" required type="text" placeholder="City">
+            id="location" name="location" required type="text" placeholder="City"
+            value="{{ $jobPosting->location->name }}">
         </div>
         <div class="mb-4">
           <label class="block mb-2 font-bold text-gray-700" for="salary">
@@ -87,14 +89,15 @@
           </label>
           <input
             class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            id="salary" min="0" name="salary" type="number" placeholder='Leave blank for "Negotiate"'>
+            id="salary" min="0" name="salary" value="{{ $jobPosting->salary }}" type="number"
+            placeholder='Leave blank for "Negotiate"'>
           <x-input-error :messages="$errors->get('salary')" class="mt-2" />
         </div>
 
 
         <div class="flex justify-end mb-4">
           <x-primary-button type="submit" class="ml-auto">
-            {{ __('Create') }}
+            {{ __('Update') }}
           </x-primary-button>
         </div>
       </form>

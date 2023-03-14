@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\ProfileController;
+use App\Models\JobPosting;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('jobpostings.index');
 });
+
+Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employer')->name('admin');
 
 Route::resource('jobpostings', JobPostingController::class);
 

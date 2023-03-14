@@ -42,8 +42,8 @@
                 {{ __('Profile') }}
               </x-dropdown-link>
               @if (auth()->user()->type == 'employer')
-                <x-dropdown-link :href="route('jobpostings.create')">
-                  {{ __('Create Jobposting') }}
+                <x-dropdown-link :href="route('admin')">
+                  {{ __('Admin Dashboard') }}
                 </x-dropdown-link>
               @endif
 
@@ -106,8 +106,8 @@
             {{ __('Profile') }}
           </x-responsive-nav-link>
           @if (auth()->user()->type == 'employer')
-            <x-responsive-nav-link :href="route('jobpostings.create')">
-              {{ __('Create Jobposting') }}
+            <x-responsive-nav-link :href="route('admin')">
+              {{ __('Admin Dashboard') }}
             </x-responsive-nav-link>
           @endif
 
