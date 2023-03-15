@@ -25,11 +25,11 @@ Route::get('/', function () {
 
 
 // Job Postings
-Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employer')->name('admin');
+Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employer')->name('jobpostings.admin');
 Route::resource('jobpostings', JobPostingController::class);
 
 // Job Seekers
-Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'index'])->name('jobseeker.profile');
+Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'profile'])->name('jobseeker.profile');
 
 // Employers
 Route::get('/companies', [EmployerController::class, 'index'])->name('employers.index');

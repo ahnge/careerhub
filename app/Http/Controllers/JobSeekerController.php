@@ -9,8 +9,8 @@ use Illuminate\View\View;
 
 class JobSeekerController extends Controller
 {
-    //
-    public function index(string $job_seeker_id): View
+    // Profile page of the jobseeker
+    public function profile(string $job_seeker_id): View
     {
         $job_seeker = JobSeeker::findOrFail($job_seeker_id);
 
