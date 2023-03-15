@@ -40,11 +40,11 @@
             <x-slot name="content">
               @if (auth()->user()->type == 'job_seeker')
                 <x-dropdown-link :href="route('jobseeker.profile', auth()->user()->jobSeeker->id)">
-                  {{ __('Real Profile') }}
+                  {{ __('Profile') }}
                 </x-dropdown-link>
               @endif
               <x-dropdown-link :href="route('profile.edit')">
-                {{ __('Profile') }}
+                {{ __('Edit Profile') }}
               </x-dropdown-link>
               @if (auth()->user()->type == 'employer')
                 <x-dropdown-link :href="route('admin')">
