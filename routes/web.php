@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\JobSeeker;
 use App\Http\Controllers\JobSeekerController;
@@ -22,16 +23,24 @@ Route::get('/', function () {
     return redirect()->route('jobpostings.index');
 });
 
-Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employer')->name('admin');
 
+// Job Postings
+Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employer')->name('admin');
 Route::resource('jobpostings', JobPostingController::class);
 
+// Job Seekers
 Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'index'])->name('jobseeker.profile');
 
+// Employers
+Route::get('/companies', [EmployerController::class, 'index'])->name('employers.index');
+
+
+// Profile for both employers and job_seekers
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Authentication
 require __DIR__ . '/auth.php';
