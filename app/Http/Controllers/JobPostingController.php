@@ -7,6 +7,7 @@ use Illuminate\View\View;
 
 use App\Models\JobPosting;
 use App\Models\Location;
+use Illuminate\Support\Facades\Session;
 
 class JobPostingController extends Controller
 {
@@ -64,7 +65,7 @@ class JobPostingController extends Controller
 
         $jobPosting->save();
 
-        return redirect()->route('admin')->with('flash', 'Job posting created successfully.')->with('status', 'success');
+        return redirect()->route('admin')->with('flashes', [['status' => 'success', 'message' => 'Job Posting created successfully!']]);
     }
 
     /**
@@ -125,7 +126,7 @@ class JobPostingController extends Controller
 
         $jobPosting->save();
 
-        return redirect()->route('jobpostings.admin')->with('flash', 'Job posting updated successfully!')->with('status', 'success');
+        return redirect()->route('jobpostings.admin')->with('flashes', [['status' => 'success', 'message' => 'Job Posting updated successfully!']]);
     }
 
     /**
@@ -140,7 +141,7 @@ class JobPostingController extends Controller
 
         $jobPosting->delete();
 
-        return redirect()->route('jobpostings.admin')->with('flash', 'Job Posting has been deleted!')->with('status', 'success');
+        return redirect()->route('jobpostings.admin')->with('flashes', [['status' => 'success', 'message' => 'Job Posting has been deleted!']]);
     }
 
     public function admin(Request $request)

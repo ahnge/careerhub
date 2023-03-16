@@ -31,7 +31,7 @@ class EmployerController extends Controller
         if ($request->hasFile('company_logo')) {
             // Ensure file type is valid
             if (!MyHelper::validate_extension($request, 'company_logo')) {
-                return Redirect::route('profile.edit')->with('status', 'error')->with('flash', 'Invalid file type!');
+                return Redirect::route('profile.edit')->with('flashes', [['status' => 'error', 'message' => 'Invalid file type!']]);
             }
 
             $normalized_path = MyHelper::storeAndGetPath($request, 'images', 'company_logo');
@@ -50,6 +50,6 @@ class EmployerController extends Controller
         }
 
 
-        return Redirect::route('profile.edit')->with('status', 'success')->with('flash', 'Profile updated successfully!');
+        return Redirect::route('profile.edit')->with('flashes', [['status' => 'success', 'message' => 'Profile updated successfully!']]);
     }
 }

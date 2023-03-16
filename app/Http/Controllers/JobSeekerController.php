@@ -55,6 +55,6 @@ class JobSeekerController extends Controller
         }
 
 
-        return Redirect::route('profile.edit')->with('status', 'success')->with('flash', 'Profile updated successfully!');
+        return Redirect::route('profile.edit')->with('flashes', [['status' => 'success', 'message' => 'Profile updated successfully!']]);
     }
 }
