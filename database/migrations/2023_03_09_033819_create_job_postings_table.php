@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('job_postings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('employer_id');
             $table->unsignedBigInteger('location_id');
             $table->string('title');
             $table->text('description');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('salary', 8, 2)->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('employer_id')->references('id')->on('employers')->cascadeOnDelete();
             $table->foreign('location_id')->references('id')->on('locations');
         });
     }

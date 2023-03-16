@@ -13,7 +13,7 @@ class Location extends Model
         'name'
     ];
 
-    public function jobPosting()
+    public function jobPostings()
     {
         return $this->hasMany(jobPosting::class);
     }
