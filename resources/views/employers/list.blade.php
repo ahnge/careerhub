@@ -17,6 +17,7 @@
           <div class="p-6 mb-4 bg-white rounded-md shadow-md job-posting">
             <h3 class="mb-2 text-xl font-semibold">{{ $employer->company_name }}</h3>
             <div>Job Opennings: {{ count($employer->jobPostings) }}</div>
+            <a href="{{ route('employers.show', $employer->id) }}">Detail</a>
           </div>
         @endforeach
       </div>

@@ -50,42 +50,8 @@
       @endif
     </div>
 
-    <div>
-      @if (auth()->user()->type === 'employer')
-        <x-input-label for="company_name" :value="__('Company Name')" />
-        <x-text-input id="company_name" name="company_name" type="text" class="block w-full mt-1" :value="old('compant_name', $user->employer->company_name)"
-          required />
-        <x-input-error class="mt-2" :messages="$errors->get('company_name')" />
-      @endif
-    </div>
-
-    <div>
-      @if (auth()->user()->type === 'employer')
-        <x-input-label for="company_logo" :value="__('Company Logo')" />
-        <x-text-input id="company_logo" name="company_logo" type="file" class="block w-full mt-1" />
-        <x-input-error class="mt-2" :messages="$errors->get('company_logo')" />
-      @else
-        <x-input-label for="profile_img" :value="__('Profile Image')" />
-        <x-text-input id="profile_img" name="profile_img" type="file" class="block w-full mt-1" />
-        <x-input-error class="mt-2" :messages="$errors->get('profile_img')" />
-      @endif
-    </div>
-
-    <div>
-      @if (auth()->user()->type === 'job_seeker')
-        <x-input-label for="resume" :value="__('Resume')" />
-        <x-text-input id="resume" name="resume" type="file" class="block w-full mt-1" />
-        <x-input-error class="mt-2" :messages="$errors->get('resume')" />
-      @endif
-    </div>
-
     <div class="flex items-center gap-4">
-      <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-      @if (session('status') === 'profile-updated')
-        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600">
-          {{ __('Saved.') }}</p>
-      @endif
+      <x-primary-button type='submit'>{{ __('Save') }}</x-primary-button>
     </div>
   </form>
 </section>

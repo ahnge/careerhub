@@ -23,14 +23,27 @@
               {{ $jobPosting->employer->company_name }}
             </dd>
           </div>
-          <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Location
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ $jobPosting->location->name }}
-            </dd>
-          </div>
+
+          @if ($jobPosting->type === 'on_site')
+            <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Location
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ $jobPosting->location->name }}
+              </dd>
+            </div>
+          @else
+            <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">
+                Location
+              </dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ $jobPosting->type }}
+              </dd>
+            </div>
+          @endif
+
           <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
             <dt class="text-sm font-medium text-gray-500">
               Salary
@@ -39,12 +52,20 @@
               {{ $jobPosting->salary }}
             </dd>
           </div>
-          <div class="px-4 py-5">
+          <div class="px-6 py-5">
             <div class="mb-3 text-sm font-medium text-center text-gray-500">
               Description
             </div>
-            <dd class="mt-1 text-sm text-center text-gray-900 sm:mt-0 sm:col-span-2">
+            <dd class="mt-1 text-sm text-left text-gray-900 sm:mt-0 sm:col-span-2">
               {{ $jobPosting->description }}
+            </dd>
+          </div>
+          <div class="px-6 py-5">
+            <div class="mb-3 text-sm font-medium text-center text-gray-500">
+              Requirements
+            </div>
+            <dd class="mt-1 text-sm text-left text-gray-900 sm:mt-0 sm:col-span-2">
+              {{ $jobPosting->requirements }}
             </dd>
           </div>
         </dl>
