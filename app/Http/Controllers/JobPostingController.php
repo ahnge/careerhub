@@ -72,7 +72,9 @@ class JobPostingController extends Controller
      */
     public function show(string $id)
     {
-        return redirect()->route('admin');
+        return view('job_postings.detail', [
+            'jobPosting' => JobPosting::findOrFail($id),
+        ]);
     }
 
     /**
@@ -123,7 +125,7 @@ class JobPostingController extends Controller
 
         $jobPosting->save();
 
-        return redirect()->route('admin')->with('flash', 'Job posting updated successfully!')->with('status', 'success');
+        return redirect()->route('jobpostings.admin')->with('flash', 'Job posting updated successfully!')->with('status', 'success');
     }
 
     /**
@@ -138,7 +140,7 @@ class JobPostingController extends Controller
 
         $jobPosting->delete();
 
-        return redirect()->route('admin')->with('flash', 'Job Posting has been deleted!')->with('status', 'success');
+        return redirect()->route('jobpostings.admin')->with('flash', 'Job Posting has been deleted!')->with('status', 'success');
     }
 
     public function admin(Request $request)
@@ -147,7 +149,7 @@ class JobPostingController extends Controller
         $user = $request->user();
 
         // Get the job postings for the user
-        $jobPostings = $user->jobPostings()->orderBy('created_at', 'desc')->paginate(10);
+        $jobPostings = $user->employer->jobPostings()->orderBy('created_at', 'desc')->paginate(10);
 
         // Render the admin view with the job postings
         return view('admin.index', compact('jobPostings'));

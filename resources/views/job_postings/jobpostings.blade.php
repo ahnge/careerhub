@@ -23,7 +23,8 @@
               <li>Salary: <span class="font-semibold">${{ number_format($jobPosting->salary, 2) }}</span></li>
               <li>Location: <span class="font-semibold">{{ $jobPosting->location->name }}</span></li>
             </ul>
-            <a href="/jobposting/{{ $jobPosting->id }}" class="inline-block btn btn-primary">View Details</a>
+            <a href="{{ route('jobpostings.show', $jobPosting->id) }}" class="inline-block btn btn-primary">View
+              Details</a>
           </div>
         @endforeach
       </div>

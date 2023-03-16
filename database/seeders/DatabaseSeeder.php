@@ -20,37 +20,35 @@ class DatabaseSeeder extends Seeder
     {
 
         $admin = User::factory()
-            ->has(JobPosting::factory()
-                ->for(Location::factory()
-                    ->state([
-                        'name' => 'Yangon'
-                    ]))
-                ->count(10))
             ->state([
                 'name' => 'admin',
                 'email' => 'a@a.com',
                 'type' => 'employer'
             ]);
 
-        Employer::factory()
+        Employer::factory()->has(
+            JobPosting::factory()->for(
+                Location::factory()->state(['name' => 'Yangon'])
+            )
+                ->count(10)
+        )
             ->count(1)
             ->for($admin)
             ->create();
 
         $admin1 = User::factory()
-            ->has(JobPosting::factory()
-                ->for(Location::factory()
-                    ->state([
-                        'name' => 'Mandalay'
-                    ]))
-                ->count(10))
             ->state([
                 'name' => 'admin1',
                 'email' => 'b@b.com',
                 'type' => 'employer'
             ]);
 
-        Employer::factory()
+        Employer::factory()->has(
+            JobPosting::factory()->for(
+                Location::factory()->state(['name' => 'Mandalay'])
+            )
+                ->count(10)
+        )
             ->count(1)
             ->for($admin1)
             ->create();
