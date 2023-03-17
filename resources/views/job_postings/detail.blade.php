@@ -49,7 +49,7 @@
               Salary
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ $jobPosting->salary }}
+              MMK {{ $jobPosting->salary }}
             </dd>
           </div>
           <div class="px-6 py-5">
