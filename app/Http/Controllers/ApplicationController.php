@@ -35,9 +35,11 @@ class ApplicationController extends Controller
             ->exists();
 
         if ($old_application_exists) {
-            Session::flash('flashes', [['status' => 'error', 'message' => 'You have already applied!']]);
+            $status = 'error';
+            $message = 'You have already applied!';
+            Session::flash('flashes', [compact('status', 'message')]);
 
-            return redirect()->route('jobpostings.show', ['jobposting' => (int)$validated['job_posting_id']]);
+            return redirect()->route('jobpostings.show', ['jobposting' => $job_posting_id]);
         }
 
         // Create new application 

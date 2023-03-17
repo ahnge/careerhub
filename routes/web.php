@@ -3,10 +3,8 @@
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobPostingController;
-use App\Http\Controllers\JobSeeker;
 use App\Http\Controllers\JobSeekerController;
 use App\Http\Controllers\ProfileController;
-use App\Models\JobPosting;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -18,6 +18,9 @@ class EmployerController extends Controller
         ]);
     }
 
+    /*
+    * Public Company profile
+    */
     public function show(Employer $employer)
     {
         return view('employers.detail', [
@@ -25,13 +28,18 @@ class EmployerController extends Controller
         ]);
     }
 
+    /*
+    * Update the employer table record. (Update Company profile)
+    */
     public function update(Request $request, Employer $employer)
     {
         // handle employer.company_logo
         if ($request->hasFile('company_logo')) {
             // Ensure file type is valid
             if (!MyHelper::validate_extension($request, 'company_logo')) {
-                return Redirect::route('profile.edit')->with('flashes', [['status' => 'error', 'message' => 'Invalid file type!']]);
+                $status = 'error';
+                $message = 'Invalid file type!';
+                return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
             }
 
             $normalized_path = MyHelper::storeAndGetPath($request, 'images', 'company_logo');
@@ -49,7 +57,9 @@ class EmployerController extends Controller
             $employer->save();
         }
 
-
-        return Redirect::route('profile.edit')->with('flashes', [['status' => 'success', 'message' => 'Profile updated successfully!']]);
+        // Redirect with success
+        $status = 'success';
+        $message = 'Profile updated successfully!';
+        return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
     }
 }

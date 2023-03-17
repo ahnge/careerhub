@@ -65,7 +65,9 @@ class JobPostingController extends Controller
 
         $jobPosting->save();
 
-        return redirect()->route('admin')->with('flashes', [['status' => 'success', 'message' => 'Job Posting created successfully!']]);
+        $status = 'success';
+        $message = 'Job Posting created successfully!';
+        return redirect()->route('admin')->with('flashes', [compact('status', 'message')]);
     }
 
     /**
@@ -126,7 +128,9 @@ class JobPostingController extends Controller
 
         $jobPosting->save();
 
-        return redirect()->route('jobpostings.admin')->with('flashes', [['status' => 'success', 'message' => 'Job Posting updated successfully!']]);
+        $status = 'success';
+        $message = 'Job Posting updated successfully!';
+        return redirect()->route('jobpostings.admin')->with('flashes', [compact('status', 'message')]);
     }
 
     /**
@@ -141,9 +145,14 @@ class JobPostingController extends Controller
 
         $jobPosting->delete();
 
-        return redirect()->route('jobpostings.admin')->with('flashes', [['status' => 'success', 'message' => 'Job Posting has been deleted!']]);
+        $status = 'success';
+        $message = 'Job Posting has been deleted!';
+        return redirect()->route('jobpostings.admin')->with('flashes', [compact('status', 'message')]);
     }
 
+    /**
+     * Admin panel for user of type 'employer'
+     */
     public function admin(Request $request)
     {
         // Get the authenticated user
