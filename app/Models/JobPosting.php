@@ -22,7 +22,7 @@ class JobPosting extends Model
         return $this->belongsTo(Location::class);
     }
 
-    public function jobSeekers(): BelongsToMany
+    public function applicants(): BelongsToMany
     {
         return $this->belongsToMany(JobSeeker::class, 'applications');
     }

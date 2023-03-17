@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 use App\Helpers\MyHelper;
+use App\Models\JobPosting;
 
 class EmployerController extends Controller
 {
@@ -61,5 +62,16 @@ class EmployerController extends Controller
         $status = 'success';
         $message = 'Profile updated successfully!';
         return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
+    }
+
+
+    /*
+    * See all applicants of this jobPosting
+    */
+    public function viewApplicants(JobPosting $jobposting)
+    {
+        $applicants = $jobposting->applicants()->paginate(10);
+
+        return view('employers.view_applicants', compact('jobposting', 'applicants'));
     }
 }

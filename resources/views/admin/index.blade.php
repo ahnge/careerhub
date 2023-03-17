@@ -10,7 +10,7 @@
       <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
           <div class="flex items-center justify-between mb-4">
-            <h1 class="text-2xl font-medium">Job Postings</h1>
+            <h1 class="text-2xl font-medium">Your Company's Job Postings</h1>
             <a href="{{ route('jobpostings.create') }}"
               class="px-4 py-2 text-white bg-indigo-500 rounded hover:bg-indigo-600">Create Job Posting</a>
           </div>
@@ -19,9 +19,8 @@
               <thead>
                 <tr class="text-left">
                   <th class="px-4 py-2">Title</th>
-                  <th class="px-4 py-2">Type</th>
-                  <th class="px-4 py-2">Location</th>
-                  <th class="px-4 py-2">Salary</th>
+                  <th class="px-4 py-2">Detail</th>
+                  <th class="px-4 py-2">Applicants</th>
                   <th class="px-4 py-2">Actions</th>
                 </tr>
               </thead>
@@ -29,12 +28,22 @@
                 @foreach ($jobPostings as $jobPosting)
                   <tr>
                     <td class="px-4 py-2 border">{{ $jobPosting->title }}</td>
-                    <td class="px-4 py-2 border">{{ $jobPosting->type }}</td>
-                    <td class="px-4 py-2 border">{{ $jobPosting->location->name }}</td>
-                    @php
-                      $salary = $jobPosting->salary > 0 ? $jobPosting->salary : 'negotiate';
-                    @endphp
-                    <td class="px-4 py-2 border">{{ $salary }}</td>
+                    <td class="px-4 py-2 border">
+                      <a class="text-indigo-500 hover:text-indigo-700"
+                        href="{{ route('jobpostings.show', $jobPosting->id) }}">Detail</a>
+                    </td>
+                    <td class="px-4 py-2 border">
+                      @if (count($jobPosting->applicants) > 0)
+                        @php
+                          $count = count($jobPosting->applicants);
+                        @endphp
+                        <a class="text-indigo-500 hover:text-indigo-700"
+                          href="{{ route('jobposting.applications', $jobPosting->id) }}">See all {{ $count }}
+                          Applicants</a>
+                      @else
+                        <p>No applicants yet</p>
+                      @endif
+                    </td>
                     <td class="px-4 py-2 border">
                       <a href="{{ route('jobpostings.edit', $jobPosting->id) }}"
                         class="mr-2 text-indigo-500 hover:text-indigo-700">Edit</a>
