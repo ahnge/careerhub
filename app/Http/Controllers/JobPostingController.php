@@ -159,7 +159,7 @@ class JobPostingController extends Controller
         $user = $request->user();
 
         // Get the job postings for the user
-        $jobPostings = $user->employer->jobPostings()->orderBy('created_at', 'desc')->paginate(10);
+        $jobPostings = $user->employer->jobPostings()->with('applicants')->orderBy('created_at', 'desc')->paginate(10);
 
         // Render the admin view with the job postings
         return view('admin.index', compact('jobPostings'));
