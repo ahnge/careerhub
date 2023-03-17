@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobPostingController;
 use App\Http\Controllers\JobSeeker;
@@ -31,12 +32,14 @@ Route::resource('jobpostings', JobPostingController::class);
 // Job Seekers
 Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'profile'])->name('jobseeker.profile');
 Route::patch('/jobseekers/{jobseeker}', [JobSeekerController::class, 'update'])->name('jobseeker.update');
+
 // Employers
 Route::get('/companies', [EmployerController::class, 'index'])->name('employers.index');
 Route::get('/companies/{employer}', [EmployerController::class, 'show'])->name('employers.show');
 Route::patch('/companies/{employer}', [EmployerController::class, 'update'])->name('employer.update');
 
-
+// Applications
+Route::post('/apply', [ApplicationController::class, 'store'])->name('application.store');
 
 // Profile for both employers and job_seekers
 Route::middleware('auth')->group(function () {

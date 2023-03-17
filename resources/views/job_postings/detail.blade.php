@@ -70,6 +70,25 @@
           </div>
         </dl>
       </div>
+
+      @guest
+        <div class="px-4 py-5 sm:px-6 flex justify-center border-t border-gray-200">
+          <a href="{{ route('login') }}">
+            <x-primary-button>Login to apply</x-primary-button>
+          </a>
+        </div>
+      @endguest
+
+      @if (auth()->user() && auth()->user()->type === 'job_seeker')
+        <form action="{{ route('application.store') }}" method="post"
+          class="px-4 py-5 sm:px-6 flex justify-center border-t border-gray-200">
+          @csrf
+          <input type="hidden" name="job_seeker_id" value="{{ auth()->user()->jobSeeker->id }}">
+          <input type="hidden" name="job_posting_id" value="{{ $jobPosting->id }}">
+          <x-primary-button>Apply</x-primary-button>
+        </form>
+      @endif
     </div>
   </div>
+
 </x-guest-layout>

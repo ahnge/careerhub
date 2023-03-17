@@ -29,8 +29,8 @@
       </header>
     @endif
 
-    @if (session('flash'))
-      <x-flash :status="session('status')" :flash="session('flash')" />
+    @if (session('flashes'))
+      <x-flashes :flashes="session('flashes')" />
     @endif
 
     <!-- Page Content -->
