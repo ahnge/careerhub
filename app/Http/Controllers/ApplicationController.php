@@ -27,8 +27,16 @@ class ApplicationController extends Controller
         // Accounts type of job_seeker are authorized.
         $this->authorize('apply', Application::class);
 
+        // Ensure user has uploaded resume.
+        if (!$request->user()->jobSeeker->resume) {
+            $status = 'warning';
+            $message = 'Please upload your resume to apply!';
+            Session::flash('flashes', [compact('status', 'message')]);
 
-        // Ensure user has not been applied.
+            return redirect()->route('jobpostings.show', ['jobposting' => $job_posting_id]);
+        }
+
+        // Ensure user has not been applied before.
         $old_application_exists = DB::table('applications')
             ->where('job_seeker_id', '=', $job_seeker_id)
             ->where('job_posting_id', '=', $job_posting_id)

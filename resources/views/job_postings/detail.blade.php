@@ -7,12 +7,18 @@
   </x-slot>
 
   {{-- Body --}}
-  <div class="px-5">
+  <div class="p-5">
     <div class="max-w-xl mx-auto mt-20 overflow-hidden bg-white rounded-lg shadow">
-      <div class="px-4 py-5 sm:px-6">
-        <h2 class="text-lg font-medium leading-6 text-gray-900">{{ $jobPosting->title }}</h2>
-        <p class="max-w-2xl mt-1 text-sm text-gray-500">{{ $jobPosting->created_at->diffForHumans() }}</p>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h2 class="text-lg font-medium leading-6 text-gray-900">{{ $jobPosting->title }}</h2>
+          <p class="max-w-2xl mt-1 text-sm text-gray-500">{{ $jobPosting->created_at->diffForHumans() }}</p>
+        </div>
+        <a href="{{ back()->getTargetUrl() }}">
+          <x-primary-button>Back</x-primary-button>
+        </a>
       </div>
+
       <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
         <dl class="sm:divide-y sm:divide-gray-200">
           <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">

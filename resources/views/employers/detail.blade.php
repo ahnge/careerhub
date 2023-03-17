@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
 
-  <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <div class="py-6 mx-auto max-w-7xl px-6 lg:px-8">
     <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
       <div class="p-6">
         @if ($employer->company_logo)
@@ -17,6 +17,9 @@
 
         <div class="flex justify-between">
           <h1 class="text-2xl font-bold">{{ $employer->company_name }}</h1>
+          <a href="{{ back()->getTargetUrl() }}">
+            <x-primary-button>Back</x-primary-button>
+          </a>
         </div>
 
         <div class="mt-4">

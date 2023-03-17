@@ -17,14 +17,16 @@
         <p class="mt-2 text-gray-600">{{ $user->email }}</p>
 
         <!-- Resume download button -->
-        @if ($user->jobSeeker->resume)
-          <div class="mt-4">
-            <a href="{{ Storage::url($user->jobSeeker->resume) }}" download="{{ $user->name }}'s_resume"
-              class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-              Download Resume
-            </a>
-          </div>
-        @endif
+        @unless(auth()->user()->id === $user->id)
+          @if ($user->jobSeeker->resume)
+            <div class="mt-4">
+              <a href="{{ Storage::url($user->jobSeeker->resume) }}" download="{{ $user->name }}'s_resume"
+                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                Download Resume
+              </a>
+            </div>
+          @endif
+        @endunless
 
         @auth
           @if (auth()->user()->id === $user->id)
