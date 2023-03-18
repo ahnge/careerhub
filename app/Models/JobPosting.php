@@ -26,4 +26,14 @@ class JobPosting extends Model
     {
         return $this->belongsToMany(JobSeeker::class, 'applications');
     }
+
+    public function industry(): BelongsTo
+    {
+        return $this->belongsTo(Industry::class);
+    }
+
+    public function jobFunction(): BelongsTo
+    {
+        return $this->belongsTo(JobFunction::class);
+    }
 }

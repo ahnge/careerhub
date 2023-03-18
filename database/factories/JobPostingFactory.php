@@ -24,6 +24,8 @@ class JobPostingFactory extends Factory
             'requirements' => fake()->text(),
             'type' => $random > 0 ? 'remote' : 'on_site',
             'time' => $random > 0 ? 'full_time' : 'part_time',
+            'industry_id' => fake()->numberBetween(1, 27),
+            'job_function_id' => fake()->numberBetween(1, 192),
             'salary' => fake()->numberBetween(400000, 2000000),
         ];
     }

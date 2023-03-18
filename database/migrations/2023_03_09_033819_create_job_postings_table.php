@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('job_postings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employer_id');
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->unsignedBigInteger('job_function_id')->nullable();
+            $table->unsignedBigInteger('industry_id')->nullable();
             $table->string('title');
             $table->text('description');
             $table->text('requirements');
@@ -24,7 +26,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('employer_id')->references('id')->on('employers')->cascadeOnDelete();
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('location_id')->references('id')->on('locations')->nullOnDelete();
+            $table->foreign('job_function_id')->references('id')->on('job_functions')->nullOnDelete();
+            $table->foreign('industry_id')->references('id')->on('industries')->nullOnDelete();
         });
     }
 

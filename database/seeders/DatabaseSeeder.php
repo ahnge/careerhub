@@ -11,6 +11,9 @@ use App\Models\JobPosting;
 use App\Models\JobSeeker;
 use App\Models\Location;
 
+
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,6 +21,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            IndustrySeeder::class,
+            JobFunctionSeeder::class,
+        ]);
 
         $admin = User::factory()
             ->state([

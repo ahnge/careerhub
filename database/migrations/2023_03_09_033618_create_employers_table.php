@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->string('company_name')->nullable();
             $table->string('company_logo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('location_id')->references('id')->on('locations')->nullOnDelete();
         });
     }
 
