@@ -27,6 +27,7 @@ class JobPostingFactory extends Factory
             'industry_id' => fake()->numberBetween(1, 27),
             'job_function_id' => fake()->numberBetween(1, 192),
             'salary' => fake()->numberBetween(400000, 2000000),
+            'post' => fake()->numberBetween(0, 10),
         ];
     }
 }

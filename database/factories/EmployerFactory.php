@@ -19,7 +19,7 @@ class EmployerFactory extends Factory
         return [
             'company_name' => fake()->name(),
             'industry_id' => fake()->numberBetween(1, 27),
-            'about' => fake()->text(50),
+            'about' => fake()->paragraph(),
         ];
     }
 }

@@ -18,7 +18,7 @@
             class="w-full p-6 mb-4 transition-colors duration-300 ease-in bg-white border-l-8 border-white rounded-md shadow-md job-posting hover:border-blue-400">
             <div class="flex items-center justify-start">
               <h3 class="mb-2 text-xl font-semibold">{{ $jobPosting->title }}</h3>
-              <div class="px-2 py-1 ml-3 text-sm text-white bg-blue-400">{{ ucfirst($jobPosting->time) }}</div>
+              <div class="px-2 py-1 ml-3 text-sm text-blue-600 bg-blue-200">{{ ucfirst($jobPosting->time) }}</div>
             </div>
             <ul class="mt-3 mb-4 ml-6 list-disc">
               <li>Functional area: <span class="font-semibold">{{ ucfirst($jobPosting->jobFunction->name) }}</span>
