@@ -46,9 +46,15 @@ class MyHelper
         return $normalized_path;
     }
 
-    static function validate_extension($request, string $file_name): bool
+    static function validate_extension($request, string $file_name, string $case): bool
     {
-        $allowed_file_extensions = ['jpg', 'png', 'jpeg', 'txt', 'bmp', 'pdf', 'doc'];
+
+        // Determine which case are we validating
+        if ($case === 'profile') {
+            $allowed_file_extensions = ['jpg', 'png', 'jpeg', 'bmp'];
+        } elseif ($case === 'resume') {
+            $allowed_file_extensions = ['jpg', 'png', 'jpeg', 'txt', 'bmp', 'pdf', 'doc'];
+        }
 
         // Get the file extension
         $file = $request->file($file_name);

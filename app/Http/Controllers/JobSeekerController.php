@@ -28,7 +28,7 @@ class JobSeekerController extends Controller
         // Handle the job_seeker profile image
         if ($request->hasFile('profile_img')) {
             // Ensure file type is valid
-            if (!MyHelper::validate_extension($request, 'profile_img')) {
+            if (!MyHelper::validate_extension($request, 'profile_img', 'profile')) {
                 return Redirect::route('profile.edit')->with('status', 'error')->with('flash', 'Invalid file type!');
             }
 
@@ -43,7 +43,7 @@ class JobSeekerController extends Controller
         // Handle the job_seeker's resume
         if ($request->hasFile('resume')) {
             // Ensure file type is valid
-            if (!MyHelper::validate_extension($request, 'resume')) {
+            if (!MyHelper::validate_extension($request, 'resume', 'resume')) {
                 return Redirect::route('profile.edit')->with('status', 'error')->with('flash', 'Invalid file type!');
             }
 

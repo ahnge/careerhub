@@ -37,7 +37,7 @@ class EmployerController extends Controller
         // handle employer.company_logo
         if ($request->hasFile('company_logo')) {
             // Ensure file type is valid
-            if (!MyHelper::validate_extension($request, 'company_logo')) {
+            if (!MyHelper::validate_extension($request, 'company_logo', 'profile')) {
                 $status = 'error';
                 $message = 'Invalid file type!';
                 return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
