@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('location_id')->nullable();
+            $table->unsignedBigInteger('industry_id')->nullable();
             $table->string('company_name')->nullable();
             $table->string('company_logo')->nullable();
+            $table->text('about')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('location_id')->references('id')->on('locations')->nullOnDelete();
+            $table->foreign('industry_id')->references('id')->on('industries')->nullOnDelete();
         });
     }
 
