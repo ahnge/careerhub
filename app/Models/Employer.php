@@ -25,4 +25,9 @@ class Employer extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    public function industry(): BelongsTo
+    {
+        return $this->belongsTo(Industry::class);
+    }
 }

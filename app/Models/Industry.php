@@ -14,4 +14,9 @@ class Industry extends Model
     {
         return $this->hasMany(JobPosting::class);
     }
+
+    public function employers(): HasMany
+    {
+        return $this->hasMany(Employer::class);
+    }
 }
