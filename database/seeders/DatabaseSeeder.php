@@ -33,14 +33,15 @@ class DatabaseSeeder extends Seeder
                 'type' => 'employer'
             ]);
 
+        $yangon = Location::factory()->state(['name' => 'Yangon']);
+
         Employer::factory()->has(
-            JobPosting::factory()->for(
-                Location::factory()->state(['name' => 'Yangon'])
-            )
+            JobPosting::factory()->for($yangon)
                 ->count(10)
         )
             ->count(1)
             ->for($admin)
+            ->for($yangon)
             ->create();
 
         $admin1 = User::factory()
@@ -50,14 +51,15 @@ class DatabaseSeeder extends Seeder
                 'type' => 'employer'
             ]);
 
+        $mandalay = Location::factory()->state(['name' => 'Mandalay']);
+
         Employer::factory()->has(
-            JobPosting::factory()->for(
-                Location::factory()->state(['name' => 'Mandalay'])
-            )
+            JobPosting::factory()->for($mandalay)
                 ->count(10)
         )
             ->count(1)
             ->for($admin1)
+            ->for($mandalay)
             ->create();
 
         JobSeeker::factory()

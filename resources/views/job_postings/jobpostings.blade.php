@@ -14,17 +14,28 @@
       {{-- Jobs --}}
       <div class="">
         @foreach ($jobPostings as $jobPosting)
-          <div class="p-6 mb-4 bg-white rounded-md shadow-md job-posting">
-            <h3 class="mb-2 text-xl font-semibold">{{ $jobPosting->title }}</h3>
-            <p class="mb-4">{{ $jobPosting->description }}</p>
-            <ul class="mb-4 ml-6 list-disc">
-              <li>Type: <span class="font-semibold">{{ ucfirst($jobPosting->type) }}</span></li>
-              <li>Time: <span class="font-semibold">{{ ucfirst($jobPosting->time) }}</span></li>
-              <li>Salary: <span class="font-semibold">MMK {{ number_format($jobPosting->salary, 2) }}</span></li>
-              <li>Location: <span class="font-semibold">{{ $jobPosting->location->name }}</span></li>
+          <div
+            class="w-full p-6 mb-4 transition-colors duration-300 ease-in bg-white border-l-8 border-white rounded-md shadow-md job-posting hover:border-blue-400">
+            <div class="flex items-center justify-start">
+              <h3 class="mb-2 text-xl font-semibold">{{ $jobPosting->title }}</h3>
+              <div class="px-2 py-1 ml-3 text-sm text-white bg-blue-400">{{ ucfirst($jobPosting->time) }}</div>
+            </div>
+            <ul class="mt-3 mb-4 ml-6 list-disc">
+              <li>Functional area: <span class="font-semibold">{{ ucfirst($jobPosting->jobFunction->name) }}</span>
+              </li>
+              <li>Industry: <span class="font-semibold">{{ $jobPosting->industry->name }}</span></li>
             </ul>
-            <a href="{{ route('jobpostings.show', $jobPosting->id) }}" class="inline-block btn btn-primary">View
-              Details</a>
+            <div class="flex">
+              <i class="text-blue-400 fa-solid fa-house"></i>
+              <div class="ml-3"> {{ $jobPosting->employer->company_name }} Co.,Ltd</div>
+            </div>
+            <div class="flex">
+              <i class="text-blue-400 fa-solid fa-location-dot"></i>
+              <div class="ml-3"> {{ $jobPosting->employer->location->name }}</div>
+            </div>
+            <a href="{{ route('jobpostings.show', $jobPosting->id) }}" class="inline-block mt-5 btn btn-primary">
+              <x-primary-button>View Detail</x-primary-button>
+            </a>
           </div>
         @endforeach
       </div>

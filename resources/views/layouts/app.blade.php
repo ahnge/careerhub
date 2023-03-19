@@ -14,6 +14,9 @@
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  <!-- Font awesome -->
+  <script src="https://kit.fontawesome.com/9cb1209535.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="font-sans antialiased text-gray-900">
