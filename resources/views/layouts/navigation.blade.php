@@ -5,9 +5,10 @@
       <div class="flex">
         <!-- Logo -->
         <div class="flex items-center shrink-0">
-          <a href="{{ route('jobpostings.index') }}">
-            <x-application-logo class="block w-auto text-gray-800 fill-current h-9" />
+          <a href="{{ route('jobpostings.index') }}" class="max-w-[3rem]">
+            <img src="{{ asset('images/jobboard.svg') }}" alt="logo">
           </a>
+
         </div>
 
         <!-- Navigation Links -->
