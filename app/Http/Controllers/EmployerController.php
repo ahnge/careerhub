@@ -22,8 +22,10 @@ class EmployerController extends Controller
     /*
     * Public Company profile
     */
-    public function show(Employer $employer)
+    public function show($id)
     {
+        $employer = Employer::with(['jobPostings', 'location', 'industry', 'jobPostings.industry', 'jobPostings.location', 'jobPostings.jobFunction'])->findOrFail($id);
+
         return view('employers.detail', [
             'employer' => $employer,
         ]);

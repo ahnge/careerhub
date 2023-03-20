@@ -61,8 +61,11 @@
                 </h1>
               </a>
 
+              <div class="text-gray-500 mt-3">
+                <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $jobPosting->industry->name }}
+              </div>
               <div class="text-gray-500">
-                <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $employer->industry->name }}
+                <i class="mr-3 text-blue-400 fa-solid fa-compass"></i>{{ $jobPosting->jobFunction->name }}
               </div>
 
               <div class="px-3 py-1 mt-5 bg-gray-100 text-black/50">
