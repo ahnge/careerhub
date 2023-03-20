@@ -6,95 +6,146 @@
     </h2>
   </x-slot>
 
-  {{-- Body --}}
-  <div class="p-5">
-    <div class="max-w-xl mx-auto mt-20 overflow-hidden bg-white rounded-lg shadow">
-      <div class="px-4 py-5 sm:px-6 flex justify-between">
-        <div>
-          <h2 class="text-lg font-medium leading-6 text-gray-900">{{ $jobPosting->title }}</h2>
-          <p class="max-w-2xl mt-1 text-sm text-gray-500">{{ $jobPosting->created_at->diffForHumans() }}</p>
-        </div>
-        <a href="{{ back()->getTargetUrl() }}">
-          <x-primary-button>Back</x-primary-button>
+  <div class="px-6 py-6 mx-auto max-w-7xl lg:px-8">
+    {{-- topper --}}
+    <div
+      class="flex flex-col items-center py-10 overflow-hidden bg-white border-b-4 border-blue-400 shadow-xl sm:flex-row px-7 sm:rounded-lg relative">
+
+      @if ($jobPosting->employer->company_logo)
+        <a href="{{ route('employers.show', $jobPosting->employer->id) }}">
+          <img src="{{ asset($jobPosting->employer->company_logo) }}" alt="{{ $jobPosting->employer->company_name }}"
+            class="w-32 h-32 aspect-square">
         </a>
+      @endif
+
+      <div class="absolute top-5 right-0 flex flex-col space-y-3">
+        <div class="px-2 py-1 ml-3 text-sm text-blue-600 bg-blue-200">{{ ucfirst($jobPosting->type) }}</div>
+        <div class="px-2 py-1 ml-3 text-sm text-blue-600 bg-blue-200">{{ ucfirst($jobPosting->time) }}</div>
       </div>
 
-      <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
-        <dl class="sm:divide-y sm:divide-gray-200">
-          <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Company
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ $jobPosting->employer->company_name }}
-            </dd>
-          </div>
+      <div class="mt-5 sm:mt-0 sm:ml-5">
+        <div class="text-2xl font-bold">{{ $jobPosting->title }}</div>
+        <a href="{{ route('employers.show', $jobPosting->employer->id) }}">
+          <div class="mt-2 text-xl font-bold hover:text-blue-400">{{ $jobPosting->employer->company_name }}</div>
+        </a>
+        <div class="mt-3 text-gray-500">
+          <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>{{ $jobPosting->location->name }}
+        </div>
+        <div class="text-gray-500">
+          <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $jobPosting->industry->name }}
+        </div>
+        <div class="text-gray-500 mb-5">
+          <i class="mr-3 text-blue-400 fa-solid fa-compass"></i>{{ $jobPosting->jobFunction->name }}
+        </div>
 
-          @if ($jobPosting->type === 'on_site')
-            <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Location
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ $jobPosting->location->name }}
-              </dd>
-            </div>
-          @else
-            <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
-              <dt class="text-sm font-medium text-gray-500">
-                Location
-              </dt>
-              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ $jobPosting->type }}
-              </dd>
-            </div>
-          @endif
+        @if (auth()->user() && auth()->user()->type === 'job_seeker')
+          <form action="{{ route('application.store') }}" method="post">
+            @csrf
+            @method('post')
+            <input type="hidden" name="job_seeker_id" value={{ auth()->user()->id }}>
+            <input type="hidden" name="job_posting_id" value={{ $jobPosting->id }}>
+            <x-primary-button type="submit">Apply now</x-primary-button>
+          </form>
+        @endif
 
-          <div class="px-4 py-5 sm:flex sm:items-center sm:justify-between sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">
-              Salary
-            </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              MMK {{ $jobPosting->salary }}
-            </dd>
-          </div>
-          <div class="px-6 py-5">
-            <div class="mb-3 text-sm font-medium text-center text-gray-500">
-              Description
-            </div>
-            <dd class="mt-1 text-sm text-left text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ $jobPosting->description }}
-            </dd>
-          </div>
-          <div class="px-6 py-5">
-            <div class="mb-3 text-sm font-medium text-center text-gray-500">
-              Requirements
-            </div>
-            <dd class="mt-1 text-sm text-left text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ $jobPosting->requirements }}
-            </dd>
-          </div>
-        </dl>
-      </div>
-
-      @guest
-        <div class="px-4 py-5 sm:px-6 flex justify-center border-t border-gray-200">
-          <a href="{{ route('login') }}">
+        @guest
+          <a href="{{ route('login') }}" class=" self-center">
             <x-primary-button>Login to apply</x-primary-button>
           </a>
-        </div>
-      @endguest
+        @endguest
+      </div>
 
-      @if (auth()->user() && auth()->user()->type === 'job_seeker')
-        <form action="{{ route('application.store') }}" method="post"
-          class="px-4 py-5 sm:px-6 flex justify-center border-t border-gray-200">
-          @csrf
-          <input type="hidden" name="job_seeker_id" value="{{ auth()->user()->jobSeeker->id }}">
-          <input type="hidden" name="job_posting_id" value="{{ $jobPosting->id }}">
-          <x-primary-button>Apply</x-primary-button>
-        </form>
-      @endif
     </div>
-  </div>
 
+    {{-- Job Description --}}
+    <div class="mt-14">
+      <h3 class="w-full px-5 py-2 font-bold bg-white border-l-4 border-blue-400">Job Description</h3>
+      <p class="mt-3">
+        {{ $jobPosting->description }}
+      </p>
+    </div>
+
+    {{-- Job Requirememts --}}
+    <div class="mt-14">
+      <h3 class="w-full px-5 py-2 font-bold bg-white border-l-4 border-blue-400">Job Requirements</h3>
+      <p class="mt-3">
+        {{ $jobPosting->requirements }}
+      </p>
+    </div>
+
+    {{-- Job Positions --}}
+    <div class="mt-14">
+      <h3 class="w-full px-5 py-2 font-bold bg-white border-l-4 border-blue-400">Posts</h3>
+      <p class="mt-3">
+        Posts:
+        {{ $jobPosting->post }}
+      </p>
+    </div>
+
+    {{-- Related Jobs --}}
+    <div class="mt-14">
+      <h3 class="w-full px-5 py-2 font-bold bg-white border-l-4 border-blue-400">Related Jobs</h3>
+      <div class="grid grid-cols-1 gap-5 mt-5 lg:grid-cols-2 2xl:grid-cols-3 2xl:gap-7">
+        @if ($relatedJobPostings->count() > 0)
+          @foreach ($relatedJobPostings as $relatedJobPosting)
+            <div class="flex flex-col items-center pt-5 pb-16 bg-white border-b-4 border-blue-400 shadow-lg relative">
+              @if ($relatedJobPosting->employer->company_logo)
+                <img src="{{ asset($relatedJobPosting->employer->company_logo) }}" class="max-w-[4rem]"
+                  alt="Company Logo">
+              @endif
+
+              <div class="absolute right-0 px-3 py-1 text-blue-600 bg-blue-100 top-5">
+                @if ($relatedJobPosting->type === 'remote')
+                  Remote
+                @elseif ($relatedJobPosting->type === 'on_site')
+                  On Site
+                @endif
+              </div>
+
+              <a href="{{ route('jobpostings.show', $relatedJobPosting->id) }}">
+                <h1 class="mt-3 text-xl font-bold transition-colors hover:text-blue-400">
+                  {{ $relatedJobPosting->title }}
+                </h1>
+              </a>
+
+              <div class="text-gray-500 mt-3">
+                <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $relatedJobPosting->industry->name }}
+              </div>
+              <div class="text-gray-500">
+                <i class="mr-3 text-blue-400 fa-solid fa-compass"></i>{{ $relatedJobPosting->jobFunction->name }}
+              </div>
+
+              <div class="px-3 py-1 mt-5 bg-gray-100 text-black/50">
+                @if ($relatedJobPosting->post > 1)
+                  {{ $relatedJobPosting->post }} Positions
+                @else
+                  {{ $relatedJobPosting->post }} Position
+                @endif
+              </div>
+
+              <div class="flex justify-start w-full px-5 mt-5 absolute bottom-0 border-t">
+                <div class="flex-1 py-3 text-center text-gray-400 border-r">
+                  <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>
+                  {{ $relatedJobPosting->location->name }}
+                </div>
+                <div class="flex-1 py-3 text-center text-gray-400">
+                  <i class="mr-3 text-blue-400 fa-solid fa-clock"></i>
+                  @if ($relatedJobPosting->time === 'full_time')
+                    Full time
+                  @elseif ($relatedJobPosting->time === 'part_time')
+                    Part time
+                  @endif
+                </div>
+              </div>
+            </div>
+          @endforeach
+        @else
+          <p class="mt-3">
+            There is no related job postings currently.
+          </p>
+        @endif
+      </div>
+    </div>
+
+  </div>
 </x-guest-layout>

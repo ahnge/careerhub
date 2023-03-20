@@ -7,6 +7,7 @@ use Illuminate\View\View;
 
 use App\Models\JobPosting;
 use App\Models\Location;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class JobPostingController extends Controller
@@ -75,8 +76,13 @@ class JobPostingController extends Controller
      */
     public function show(string $id)
     {
+        $jobPosting = JobPosting::findOrFail($id);
+
+        $relatedJobPostings = JobPosting::with(['location', 'jobFunction', 'industry', 'employer'])->where('industry_id', '=', $jobPosting->industry->id)->whereNot('id', '=', $jobPosting->id)->limit(5)->get();
+
         return view('job_postings.detail', [
-            'jobPosting' => JobPosting::findOrFail($id),
+            'jobPosting' => $jobPosting,
+            'relatedJobPostings' => $relatedJobPostings
         ]);
     }
 
