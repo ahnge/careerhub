@@ -45,6 +45,7 @@ class EmployerController extends Controller
     */
     public function update(Request $request, Employer $employer)
     {
+        $this->authorize('update', $employer);
         // handle employer.company_logo
         if ($request->hasFile('company_logo')) {
             // Ensure file type is valid
@@ -81,6 +82,8 @@ class EmployerController extends Controller
     */
     public function viewApplicants(JobPosting $jobposting)
     {
+        $this->authorize('viewApplicants', $jobposting);
+
         $applicants = $jobposting->applicants()->paginate(10);
 
         return view('employers.view_applicants', compact('jobposting', 'applicants'));
