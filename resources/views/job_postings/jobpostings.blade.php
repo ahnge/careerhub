@@ -11,8 +11,68 @@
           opportunity!</p>
       </div>
 
+      {{-- Search --}}
+      <form action="{{ route('jobpostings.index') }}" class="mt-16 mb-10" method="GET">
+        <div class="flex flex-wrap mb-4">
+
+          <div class="w-full px-2 mb-4 md:w-1/2 md:mb-0">
+            <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="title">
+              Job Title or Keyword
+            </label>
+            <input
+              class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white"
+              id="q" name="q" type="text" placeholder="Enter job title or description keyword"
+              value="{{ old('q', $q) }}">
+          </div>
+
+          <div class="w-full px-2 mb-4 md:w-1/2 md:mb-0">
+            <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="industry">
+              Industry
+            </label>
+            <div class="relative">
+              <select
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="industry" name="industry">
+                <option value="">All industry</option>
+                @foreach ($industries as $industry => $id)
+                  <option value="{{ $id }}" {{ old('industry_id', $industry_id) == $id ? 'selected' : '' }}>
+                    {{ $industry }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="w-full px-2 mb-4 md:w-1/2 md:mt-3 md:mb-0">
+            <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="industry">
+              Functional Area
+            </label>
+            <div class="relative">
+              <select
+                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                id="job_function" name="job_function">
+                <option value="">All Functional Area</option>
+                @foreach ($job_functions as $job_function => $id)
+                  <option value="{{ $id }}"
+                    {{ old('job_function_id', $job_function_id) == $id ? 'selected' : '' }}>
+                    {{ $job_function }}
+                  </option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="w-full px-2 mb-4 md:w-1/2 md:mt-3 md:mb-0 md:relative">
+            <x-primary-button type='submit' class="-translate-x-1/2 md:absolute top-1/2 left-1/2">
+              Search
+            </x-primary-button>
+          </div>
+        </div>
+      </form>
+
+
+
       {{-- Jobs --}}
-      <div class="">
+      @if ($jobPostings->count() > 0)
         @foreach ($jobPostings as $jobPosting)
           <div
             class="w-full p-6 mb-4 transition-colors duration-300 ease-in bg-white border-l-8 border-white rounded-md shadow-md job-posting hover:border-blue-400">
@@ -38,10 +98,14 @@
             </a>
           </div>
         @endforeach
-      </div>
-      <div class="mt-10">
-        {{ $jobPostings->links() }}
-      </div>
+        <div class="mt-10">
+          {{ $jobPostings->links() }}
+        </div>
+      @else
+        <div>
+          There is no Job Postings.
+        </div>
+      @endif
     </div>
   </div>
 

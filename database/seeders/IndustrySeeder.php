@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 class IndustrySeeder extends Seeder
 {
     private $industries = [
-        "Select industry",
         "Advisory and Financial Services",
         "BPO (Business Process Outsourcing)",
         "Call Center",

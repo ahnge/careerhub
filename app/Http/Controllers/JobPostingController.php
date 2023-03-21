@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 use App\Models\JobPosting;
 use App\Models\Location;
-
+use Illuminate\Support\Facades\DB;
 
 class JobPostingController extends Controller
 {
@@ -15,11 +15,32 @@ class JobPostingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        return view('job_postings.jobpostings', [
-            'jobPostings' => JobPosting::with(['location', 'jobFunction', 'industry', 'employer'])->paginate(10)
-        ]);
+        // Get query parameters if exists
+        $q = $request->input('q');
+        $industry_id = $request->input('industry');
+        $job_function_id = $request->input('job_function');
+
+        // Build the query
+        $query = JobPosting::query()->with(['location', 'jobFunction', 'industry', 'employer']);
+
+        if (!empty($q)) {
+            $query->where('title', 'like', '%' . $q . '%');
+        }
+        if (!empty($industry_id)) {
+            $query->where('industry_id', $industry_id);
+        }
+        if (!empty($job_function_id)) {
+            $query->where('job_function_id', $job_function_id);
+        }
+
+        $jobPostings = $query->paginate(10);
+
+        $industries  = DB::table('industries')->pluck('id', 'name');
+        $job_functions = DB::table('job_functions')->pluck('id', 'name');
+
+        return view('job_postings.jobpostings', compact('jobPostings', 'industries', 'job_functions'))->with('q', $q)->with('job_function_id', $job_function_id)->with('industry_id', $industry_id);
     }
 
     /**

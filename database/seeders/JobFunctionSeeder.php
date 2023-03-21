@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 class JobFunctionSeeder extends Seeder
 {
     private $job_functions = [
-        "Select Functional Area",
         "Accountant",
         "Accountant, Financial - Tax Consultant, Auditor",
         "Accounting, Auditing & Finance",
