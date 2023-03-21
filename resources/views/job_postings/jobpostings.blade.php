@@ -1,5 +1,5 @@
 <x-app-layout>
-  <div class="py-24 bg-white sm:py-32">
+  <div class="min-h-screen py-24 bg-white sm:py-32">
     <div class="px-6 mx-auto max-w-7xl lg:px-8">
       {{-- Header --}}
       <div class="max-w-2xl mx-auto lg:mx-0">

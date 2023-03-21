@@ -6,10 +6,33 @@
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {{ __('Hiring Companies') }}
         </h2>
-        <p class="mt-2 mb-6 text-lg leading-8 text-gray-600">Browse through our current job openings and find your next
-          career
-          opportunity!</p>
+        <p class="mt-2 mb-6 text-lg leading-8 text-gray-600">Browse a diverse range of companies across different
+          industries and discover your perfect fit. Get started on your
+          career journey today.
+        </p>
       </div>
+
+      {{-- Search --}}
+      <form class="mt-16 mb-10" action="{{ route('employers.index') }}" method="GET">
+        <div class="flex flex-wrap items-center mb-4">
+          <div class="w-full px-2 mb-4 md:w-10/12 md:mb-0">
+            <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="title">
+              Company name
+            </label>
+            <input
+              class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white"
+              id="q" name="q" type="text" placeholder="Search company name"
+              value="{{ old('q', $q) }}">
+          </div>
+
+          <div class="w-full px-2 mb-4 md:w-2/12 md:mb-0 md:mt-5">
+            <x-primary-button type='submit'>Search</x-primary-button>
+          </div>
+
+        </div>
+
+
+      </form>
 
       {{-- Jobs --}}
       <div class="">

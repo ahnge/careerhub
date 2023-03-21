@@ -12,11 +12,20 @@ use App\Models\JobPosting;
 class EmployerController extends Controller
 {
     // Displaying a list of the companies
-    public function index()
+    public function index(Request $request)
     {
-        return view('employers.list', [
-            'employers' => Employer::with('jobPostings')->paginate(5)
-        ]);
+        $q = $request->input('q');
+
+        // Build the query
+        $query = Employer::query()->with('jobPostings');
+
+        if (!empty($q)) {
+            $query->where('company_name', 'like', '%' . $q . '%');
+        }
+
+        $employers = $query->paginate(10);
+
+        return view('employers.list', compact('employers'))->with('q', $q);
     }
 
     /*
