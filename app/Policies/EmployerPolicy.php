@@ -15,9 +15,4 @@ class EmployerPolicy
     {
         return $employer->user->id === $user->id;
     }
-
-    public function viewApplicants(User $user, JobPosting $jobPosting): bool
-    {
-        return $user->id === $jobPosting->employer->user->id;
-    }
 }

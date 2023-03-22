@@ -9,7 +9,7 @@
   <div class="px-6 py-6 mx-auto max-w-7xl lg:px-8">
     {{-- topper --}}
     <div
-      class="flex flex-col items-center py-10 overflow-hidden bg-white border-b-4 border-blue-400 shadow-xl sm:flex-row px-7 sm:rounded-lg relative">
+      class="relative flex flex-col items-center py-10 overflow-hidden bg-white border-b-4 border-blue-400 shadow-xl sm:flex-row px-7 sm:rounded-lg">
 
       @if ($jobPosting->employer->company_logo)
         <a href="{{ route('employers.show', $jobPosting->employer->id) }}">
@@ -18,7 +18,7 @@
         </a>
       @endif
 
-      <div class="absolute top-5 right-0 flex flex-col space-y-3">
+      <div class="absolute right-0 flex flex-col space-y-3 top-5">
         <div class="px-2 py-1 ml-3 text-sm text-blue-600 bg-blue-200">{{ ucfirst($jobPosting->type) }}</div>
         <div class="px-2 py-1 ml-3 text-sm text-blue-600 bg-blue-200">{{ ucfirst($jobPosting->time) }}</div>
       </div>
@@ -34,7 +34,7 @@
         <div class="text-gray-500">
           <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $jobPosting->industry->name }}
         </div>
-        <div class="text-gray-500 mb-5">
+        <div class="mb-5 text-gray-500">
           <i class="mr-3 text-blue-400 fa-solid fa-compass"></i>{{ $jobPosting->jobFunction->name }}
         </div>
 
@@ -42,14 +42,14 @@
           <form action="{{ route('application.store') }}" method="post">
             @csrf
             @method('post')
-            <input type="hidden" name="job_seeker_id" value={{ auth()->user()->id }}>
+            <input type="hidden" name="job_seeker_id" value={{ auth()->user()->jobSeeker->id }}>
             <input type="hidden" name="job_posting_id" value={{ $jobPosting->id }}>
             <x-primary-button type="submit">Apply now</x-primary-button>
           </form>
         @endif
 
         @guest
-          <a href="{{ route('login') }}" class=" self-center">
+          <a href="{{ route('login') }}" class="self-center ">
             <x-primary-button>Login to apply</x-primary-button>
           </a>
         @endguest
@@ -88,7 +88,7 @@
       <div class="grid grid-cols-1 gap-5 mt-5 lg:grid-cols-2 2xl:grid-cols-3 2xl:gap-7">
         @if ($relatedJobPostings->count() > 0)
           @foreach ($relatedJobPostings as $relatedJobPosting)
-            <div class="flex flex-col items-center pt-5 pb-16 bg-white border-b-4 border-blue-400 shadow-lg relative">
+            <div class="relative flex flex-col items-center pt-5 pb-16 bg-white border-b-4 border-blue-400 shadow-lg">
               @if ($relatedJobPosting->employer->company_logo)
                 <img src="{{ asset($relatedJobPosting->employer->company_logo) }}" class="max-w-[4rem]"
                   alt="Company Logo">
@@ -108,7 +108,7 @@
                 </h1>
               </a>
 
-              <div class="text-gray-500 mt-3">
+              <div class="mt-3 text-gray-500">
                 <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $relatedJobPosting->industry->name }}
               </div>
               <div class="text-gray-500">
@@ -123,7 +123,7 @@
                 @endif
               </div>
 
-              <div class="flex justify-start w-full px-5 mt-5 absolute bottom-0 border-t">
+              <div class="absolute bottom-0 flex justify-start w-full px-5 mt-5 border-t">
                 <div class="flex-1 py-3 text-center text-gray-400 border-r">
                   <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>
                   {{ $relatedJobPosting->location->name }}

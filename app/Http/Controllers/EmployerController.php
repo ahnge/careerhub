@@ -75,17 +75,4 @@ class EmployerController extends Controller
         $message = 'Profile updated successfully!';
         return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
     }
-
-
-    /*
-    * See all applicants of this jobPosting
-    */
-    public function viewApplicants(JobPosting $jobposting)
-    {
-        $this->authorize('viewApplicants', $jobposting);
-
-        $applicants = $jobposting->applicants()->paginate(10);
-
-        return view('employers.view_applicants', compact('jobposting', 'applicants'));
-    }
 }

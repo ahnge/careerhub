@@ -200,4 +200,16 @@ class JobPostingController extends Controller
         // Render the admin view with the job postings
         return view('admin.index', compact('jobPostings'));
     }
+
+    /*
+    * See all applicants of this jobPosting
+    */
+    public function viewApplicants(Request $request, JobPosting $jobposting)
+    {
+        $this->authorize('viewApplicants', $jobposting);
+
+        $applicants = $jobposting->applicants()->paginate(10);
+
+        return view('employers.view_applicants', compact('jobposting', 'applicants'));
+    }
 }

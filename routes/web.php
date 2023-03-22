@@ -30,12 +30,12 @@ Route::resource('jobpostings', JobPostingController::class);
 // Job Seekers
 Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'profile'])->name('jobseeker.profile');
 Route::patch('/jobseekers/{jobseeker}', [JobSeekerController::class, 'update'])->name('jobseeker.update');
+Route::get('/jobpostings/{jobposting}/applicants', [JobPostingController::class, 'viewApplicants'])->name('jobposting.applications');
 
 // Employers
 Route::get('/companies', [EmployerController::class, 'index'])->name('employers.index');
 Route::get('/companies/{employer}', [EmployerController::class, 'show'])->name('employers.show');
 Route::patch('/companies/{employer}', [EmployerController::class, 'update'])->name('employer.update');
-Route::get('/jobpostings/{jobposting}/applications', [EmployerController::class, 'viewApplicants'])->name('jobposting.applications');
 
 // Applications
 Route::post('/apply', [ApplicationController::class, 'store'])->name('application.store');

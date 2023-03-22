@@ -71,4 +71,9 @@ class JobPostingPolicy
         //
         return $user->id === $jobPosting->user_id;
     }
+
+    public function viewApplicants(User $user, JobPosting $jobPosting): bool
+    {
+        return $user->employer->id === $jobPosting->employer_id;
+    }
 }
