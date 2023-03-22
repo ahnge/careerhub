@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Helpers\MyHelper;
 use App\Models\JobPosting;
+use App\Models\Location;
 
 class EmployerController extends Controller
 {
@@ -46,29 +47,57 @@ class EmployerController extends Controller
     public function update(Request $request, Employer $employer)
     {
         $this->authorize('update', $employer);
-        // handle employer.company_logo
-        if ($request->hasFile('company_logo')) {
-            // Ensure file type is valid
-            if (!MyHelper::validate_extension($request, 'company_logo', 'profile')) {
-                $status = 'error';
-                $message = 'Invalid file type!';
-                return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
-            }
 
+        $validated = $request->validate([
+            'company_logo' => 'image|nullable',
+            'company_name' => 'ascii|nullable',
+            'about' => 'ascii|nullable',
+            'location' => 'ascii|nullable',
+            'industry_id' => 'integer|exists:industries,id|nullable',
+        ]);
+
+        // Ensure uploaded picture has no errors.
+        if ($request->file('company_logo') && $request->file('company_logo')->getError()) {
+            $status = 'error';
+            $message = 'Something went wrong. Maybe the file uploaded was too big.';
+            return Redirect::route('profile.edit')->with('flashes', [compact('status', 'message')]);
+        }
+
+        $employer = $request->user()->employer;
+
+        // handle employer.company_logo
+        if ($request->hasFile('company_logo') && $request->file('company_logo')->isValid()) {
             $normalized_path = MyHelper::storeAndGetPath($request, 'images', 'company_logo');
 
             // Save the path
-            $employer = $request->user()->employer;
             $employer->company_logo = $normalized_path;
-            $employer->save();
         }
 
         // Handle the employer company name
         if ($request->company_name) {
-            $employer = $request->user()->employer;
-            $employer->company_name = $request->company_name;
-            $employer->save();
+            $employer->company_name = $validated['company_name'];
         }
+
+        // Handle company about
+        if ($request->about) {
+            $employer->about = $validated['about'];
+        }
+
+        // Handle company location
+        if ($request->location) {
+            $location = Location::firstOrCreate([
+                'name' => strtolower($validated['location'])
+            ]);
+            $employer->location_id = $location->id;
+        }
+
+        // Handle company industry
+        if ($request->industry_id) {
+            $employer->industry_id = $validated['industry_id'];
+        }
+
+        // save the info
+        $employer->save();
 
         // Redirect with success
         $status = 'success';

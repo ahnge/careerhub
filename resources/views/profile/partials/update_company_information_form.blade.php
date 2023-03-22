@@ -20,15 +20,43 @@
 
     <div>
       <x-input-label for="company_name" :value="__('Company Name')" />
-      <x-text-input id="company_name" name="company_name" type="text" class="block w-full mt-1" :value="old('compant_name', $user->employer->company_name)"
+      <x-text-input id="company_name" name="company_name" type="text" class="block w-full mt-1" :value="old('company_name', $user->employer->company_name)"
         required />
-      <x-input-error class="mt-2" :messages="$errors->get('company_name')" />
     </div>
 
     <div>
       <x-input-label for="company_logo" :value="__('Company Logo')" />
-      <x-text-input id="company_logo" name="company_logo" type="file" class="block w-full mt-1" />
-      <x-input-error class="mt-2" :messages="$errors->get('company_logo')" />
+      <div class="flex items-center mt-3">
+        @if ($user->employer->company_logo)
+          <img src="{{ asset($user->employer->company_logo) }}" alt="{{ $user->employer->company_name }}'s logo"
+            class="inline max-w-[4rem] rounded-full mr-4">
+        @else
+          <img src="{{ asset('images/default_profile.svg') }}" alt="{{ $user->employer->company_name }}'s logo"
+            class="inline max-w-[4rem] rounded-full mr-4">
+        @endif
+        <x-text-input id="company_logo" name="company_logo" type="file" class="block w-full mt-1" />
+      </div>
+    </div>
+
+    <div>
+      <x-input-label for="industry_id" :value="__('Select Industry')" />
+      <select class="block w-full" id="industry_id" name="industry_id">
+        <option value="" disabled {{ !$current_industry_id ? 'selected ' : null }}>Select your industry</option>
+        @foreach ($industries as $industry => $id)
+          <option value="{{ $id }}" @selected(old('current_industry_id', $current_industry_id) == $id)>
+            {{ $industry }}</option>
+        @endforeach
+      </select>
+    </div>
+
+    <div>
+      <x-input-label for="about" :value="__('About Company')" />
+      <textarea name="about" id="about" class="block w-full" cols="30" rows="7">{{ old('about', $user->employer->about ?? null) }}</textarea>
+    </div>
+
+    <div>
+      <x-input-label for="location" :value="__('Headquarter location')" />
+      <x-text-input id="location" name="location" type="text" class="block w-full mt-1" :value="old('location', $user->employer->location->name ?? null)" />
     </div>
 
     <div class="flex items-center gap-4">

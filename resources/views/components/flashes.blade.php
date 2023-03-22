@@ -6,22 +6,26 @@
   @foreach ($flashes as $flash)
     @php
       $classes = 'py-3 px-4 rounded';
-      switch ($flash['status']) {
-          case 'success':
-              $classes .= ' bg-success';
-              break;
+      if ($flash['status']) {
+          switch ($flash['status']) {
+              case 'success':
+                  $classes .= ' bg-success';
+                  break;
       
-          case 'error':
-              $classes .= ' bg-error';
-              break;
+              case 'error':
+                  $classes .= ' bg-error';
+                  break;
       
-          case 'warning':
-              $classes .= ' bg-warning';
-              break;
+              case 'warning':
+                  $classes .= ' bg-warning';
+                  break;
       
-          default:
-              $classes .= ' bg-error';
-              break;
+              default:
+                  $classes .= ' bg-error';
+                  break;
+          }
+      } else {
+          $classes .= ' bg-error';
       }
     @endphp
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" class="mt-5">

@@ -48,6 +48,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME)->with('flashes', [['status' => 'success', 'message' => 'Registeration success!']]);
+        return redirect()->route('profile.update')->with('flashes', [['status' => 'success', 'message' => 'Registeration success!']]);
     }
 }

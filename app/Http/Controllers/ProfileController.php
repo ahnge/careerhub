@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 use App\Helpers\MyHelper;
+use App\Models\Industry;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -18,9 +20,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+        $industries  = DB::table('industries')->pluck('id', 'name');
+
+        $current_industry_id = $user->employer->industry->id ?? null;
+
+        return view('profile.edit', compact('user', 'industries', 'current_industry_id'));
     }
 
     /**
