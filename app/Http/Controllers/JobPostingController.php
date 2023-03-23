@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use App\Models\JobPosting;
 use App\Models\Location;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class JobPostingController extends Controller
 {
@@ -46,10 +47,23 @@ class JobPostingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $this->authorize('create', JobPosting::class);
-        return view('job_postings.create');
+        try {
+            $this->authorize('create', JobPosting::class);
+        } catch (\Throwable $th) {
+            $status = 'warning';
+            $message = $th->getMessage();
+            return redirect()->route('profile.update')->with('flashes', [compact('status', 'message')]);
+        }
+
+        // Get industries to display in the select input
+        $industries  = DB::table('industries')->pluck('id', 'name');
+
+        // Get job_functions to display in the select input
+        $job_functions = DB::table('job_functions')->pluck('id', 'name');
+
+        return view('job_postings.create', compact('industries', 'job_functions'));
     }
 
     /**
@@ -60,12 +74,16 @@ class JobPostingController extends Controller
         $this->authorize('create', JobPosting::class);
 
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+            'title' => 'ascii|required|max:255',
+            'description' => 'ascii|required',
             'requirements' => 'required',
             'type' => 'required|in:remote,on_site',
             'time' => 'required|in:full_time,part_time',
             'location' => 'required',
+            'industry_id' => 'integer|exists:industries,id',
+            'job_function_id' => 'integer|exists:job_functions,id',
+            'salary' => 'integer|nullable',
+            'post' => 'integer|required',
         ]);
 
         $location = Location::firstOrCreate([
@@ -79,16 +97,17 @@ class JobPostingController extends Controller
         $jobPosting->requirements = $validatedData['requirements'];
         $jobPosting->type = $validatedData['type'];
         $jobPosting->time = $validatedData['time'];
-        $jobPosting->salary = $request->salary ? (int)$request->salary : null;
-
+        $jobPosting->salary = $request->salary ? (int)$validatedData['salary'] : null;
+        $jobPosting->industry_id = $validatedData['industry_id'];
+        $jobPosting->job_function_id = $validatedData['job_function_id'];
+        $jobPosting->post = $validatedData['post'];
         $jobPosting->location_id = $location->id;
-        $jobPosting->user_id = $request->user()->id;
-
+        $jobPosting->employer_id = $request->user()->employer->id;
         $jobPosting->save();
 
         $status = 'success';
         $message = 'Job Posting created successfully!';
-        return redirect()->route('admin')->with('flashes', [compact('status', 'message')]);
+        return redirect()->route('jobpostings.admin')->with('flashes', [compact('status', 'message')]);
     }
 
     /**

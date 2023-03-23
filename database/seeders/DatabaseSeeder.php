@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 'employer'
             ]);
 
-        $yangon = Location::factory()->state(['name' => 'Yangon']);
+        $yangon = Location::factory()->state(['name' => 'yangon']);
 
         Employer::factory()->has(
             JobPosting::factory()->for($yangon)
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 'employer'
             ]);
 
-        $mandalay = Location::factory()->state(['name' => 'Mandalay']);
+        $mandalay = Location::factory()->state(['name' => 'mandalay']);
 
         Employer::factory()->has(
             JobPosting::factory()->for($mandalay)

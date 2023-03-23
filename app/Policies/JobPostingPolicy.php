@@ -4,36 +4,26 @@ namespace App\Policies;
 
 use App\Models\JobPosting;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class JobPostingPolicy
 {
-    public function before(User $user)
-    {
-        return $user->type === 'employer';
-    }
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, JobPosting $jobPosting): bool
-    {
-        return true;
-    }
-
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user): Response
     {
-        //
-        return $user->type === 'employer';
+        if (
+            !$user->type === 'employer' ||
+            !isset($user->employer->company_name) ||
+            !isset($user->employer->industry_id) ||
+            !isset($user->employer->about) ||
+            !isset($user->employer->location_id)
+        ) {
+            return Response::deny('Please update all company infomations first.');
+        }
+
+        return Response::allow();
     }
 
     /**
@@ -41,8 +31,7 @@ class JobPostingPolicy
      */
     public function update(User $user, JobPosting $jobPosting): bool
     {
-        //
-        return $user->id === $jobPosting->user_id;
+        return $user->type === 'employer' && $user->employer->id === $jobPosting->employer_id;
     }
 
     /**
@@ -50,17 +39,7 @@ class JobPostingPolicy
      */
     public function delete(User $user, JobPosting $jobPosting): bool
     {
-        //
-        return $user->id === $jobPosting->user_id;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, JobPosting $jobPosting): bool
-    {
-        //
-        return $user->id === $jobPosting->user_id;
+        return $user->type === 'employer' && $user->employer->id === $jobPosting->employer_id;
     }
 
     /**
@@ -68,12 +47,14 @@ class JobPostingPolicy
      */
     public function forceDelete(User $user, JobPosting $jobPosting): bool
     {
-        //
-        return $user->id === $jobPosting->user_id;
+        return $user->type === 'employer' && $user->employer->id === $jobPosting->employer_id;
     }
 
+    /**
+     * Determine whether the employer can view its applicants.
+     */
     public function viewApplicants(User $user, JobPosting $jobPosting): bool
     {
-        return $user->employer->id === $jobPosting->employer_id;
+        return $user->type === 'employer' && $user->employer->id === $jobPosting->employer_id;
     }
 }
