@@ -143,9 +143,13 @@ class JobPostingController extends Controller
         $jobPosting = JobPosting::find($id);
         $this->authorize('update', $jobPosting);
 
-        return view('job_postings.edit', [
-            'jobPosting' => $jobPosting
-        ]);
+        // Get industries to display in the select input
+        $industries  = DB::table('industries')->pluck('id', 'name');
+
+        // Get job_functions to display in the select input
+        $job_functions = DB::table('job_functions')->pluck('id', 'name');
+
+        return view('job_postings.edit', compact('jobPosting', 'industries', 'job_functions'));
     }
 
     /**
@@ -154,17 +158,21 @@ class JobPostingController extends Controller
     public function update(Request $request, string $id)
     {
         // Get the jobPosting instance
-        $jobPosting = JobPosting::find($id);
+        $jobPosting = JobPosting::findOrFail($id);
         // Authorize
         $this->authorize('update', $jobPosting);
 
         $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'ascii|required|max:255',
+            'description' => 'ascii|required',
             'requirements' => 'required',
             'type' => 'required|in:remote,on_site',
             'time' => 'required|in:full_time,part_time',
             'location' => 'required',
+            'industry_id' => 'integer|exists:industries,id',
+            'job_function_id' => 'integer|exists:job_functions,id',
+            'salary' => 'integer|nullable',
+            'post' => 'integer|required',
         ]);
 
 
@@ -177,10 +185,12 @@ class JobPostingController extends Controller
         $jobPosting->requirements = $validatedData['requirements'];
         $jobPosting->type = $validatedData['type'];
         $jobPosting->time = $validatedData['time'];
-
-        $jobPosting->salary = $request->salary ? (int)$request->salary : null;
+        $jobPosting->salary = $request->salary ? (int)$validatedData['salary'] : null;
+        $jobPosting->industry_id = $validatedData['industry_id'];
+        $jobPosting->job_function_id = $validatedData['job_function_id'];
+        $jobPosting->post = $validatedData['post'];
         $jobPosting->location_id = $location->id;
-
+        $jobPosting->employer_id = $request->user()->employer->id;
         $jobPosting->save();
 
         $status = 'success';
