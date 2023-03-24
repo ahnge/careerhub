@@ -6,7 +6,7 @@
     </h2>
   </x-slot>
 
-  <div class="w-full px-5">
+  <div class="w-full min-h-[75vh] px-5">
     <form method="POST" class="max-w-md my-20 p-5 bg-white rounded mx-auto" action="{{ route('password.store') }}">
       @csrf
 

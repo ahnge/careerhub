@@ -37,6 +37,10 @@
       <x-flashes :flashes="session('flashes')" />
     @endif
 
+    @if ($errors->any())
+      <x-flashes :flashes="$errors->all()" />
+    @endif
+
     <!-- Page Content -->
     <main>
       {{ $slot }}

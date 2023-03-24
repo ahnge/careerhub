@@ -9,7 +9,7 @@
   <div class="flex flex-col items-center justify-center px-5 pt-10 bg-gray-100 ">
 
     {{-- Form wrapper --}}
-    <div class="w-full px-6 py-4 my-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
+    <div class="w-full px-6 py-4 my-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg lg:max-w-xl">
 
       <form method="POST" action="{{ route('jobpostings.update', $jobPosting->id) }}">
         @method('PUT')

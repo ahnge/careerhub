@@ -7,7 +7,7 @@
   </x-slot>
 
   {{-- Form wrapper --}}
-  <div class="w-full px-5">
+  <div class="w-full px-5 min-h-[80vh]">
     <form method="POST" class="max-w-md my-20 p-5 bg-white rounded mx-auto" action="{{ route('login') }}">
       @csrf
 

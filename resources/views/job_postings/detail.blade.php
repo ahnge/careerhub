@@ -29,7 +29,7 @@
           <div class="mt-2 text-xl font-bold hover:text-blue-400">{{ $jobPosting->employer->company_name }}</div>
         </a>
         <div class="mt-3 text-gray-500">
-          <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>{{ $jobPosting->location->name }}
+          <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>{{ ucfirst($jobPosting->location->name) }}
         </div>
         <div class="text-gray-500">
           <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $jobPosting->industry->name }}
@@ -126,7 +126,7 @@
               <div class="absolute bottom-0 flex justify-start w-full px-5 mt-5 border-t">
                 <div class="flex-1 py-3 text-center text-gray-400 border-r">
                   <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>
-                  {{ $relatedJobPosting->location->name }}
+                  {{ ucfirst($relatedJobPosting->location->name) }}
                 </div>
                 <div class="flex-1 py-3 text-center text-gray-400">
                   <i class="mr-3 text-blue-400 fa-solid fa-clock"></i>

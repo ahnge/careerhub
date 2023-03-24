@@ -91,7 +91,7 @@
             </div>
             <div class="flex">
               <i class="text-blue-400 fa-solid fa-location-dot"></i>
-              <div class="ml-3"> {{ $jobPosting->employer->location->name }}</div>
+              <div class="ml-3"> {{ ucfirst($jobPosting->employer->location->name) }}</div>
             </div>
             <a href="{{ route('jobpostings.show', $jobPosting->id) }}" class="inline-block mt-5 btn btn-primary">
               <x-primary-button>View Detail</x-primary-button>

@@ -20,7 +20,16 @@
 
     <div>
       <x-input-label for="profile_img" :value="__('Profile Image')" />
-      <x-text-input id="profile_img" name="profile_img" type="file" class="block w-full mt-1" />
+      <div class="flex items-center mt-3">
+        @if ($user->jobSeeker->profile_img)
+          <img src="{{ asset($user->jobSeeker->profile_img) }}" alt="{{ $user->name }}'s logo"
+            class="inline max-w-[4rem] rounded-full mr-4">
+        @else
+          <img src="{{ asset('images/default_profile.svg') }}" alt="{{ $user->name }}'s logo"
+            class="inline max-w-[4rem] rounded-full mr-4">
+        @endif
+        <x-text-input id="profile_img" name="profile_img" type="file" class="block w-full mt-1" />
+      </div>
       <x-input-error class="mt-2" :messages="$errors->get('profile_img')" />
     </div>
 

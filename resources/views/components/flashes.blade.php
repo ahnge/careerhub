@@ -6,7 +6,7 @@
   @foreach ($flashes as $flash)
     @php
       $classes = 'py-3 px-4 rounded';
-      if ($flash['status']) {
+      if ($flash['status'] ?? false) {
           switch ($flash['status']) {
               case 'success':
                   $classes .= ' bg-success';
@@ -30,7 +30,7 @@
     @endphp
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" class="mt-5">
       <div x-show="show" {{ $attributes->merge(['class' => $classes]) }}>
-        <p class="inline-block mr-3">{{ $flash['message'] }}</p>
+        <p class="inline-block mr-3">{{ $flash['message'] ?? $flash }}</p>
         <button x-on:click="show = false" class="inline-block px-2 py-1 text-white rounded hover:bg-gray-700">
           X
         </button>

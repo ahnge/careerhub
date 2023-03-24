@@ -7,11 +7,13 @@ namespace App\Providers;
 use App\Models\Application;
 use App\Models\Employer;
 use App\Models\JobPosting;
+use App\Models\JobSeeker;
 use App\Policies\ApplicationPolicy;
 use App\Policies\EmployerPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 use App\Policies\JobPostingPolicy;
+use App\Policies\JobSeekerPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         JobPosting::class => JobPostingPolicy::class,
         Application::class => ApplicationPolicy::class,
         Employer::class => EmployerPolicy::class,
+        JobSeeker::class => JobSeekerPolicy::class,
     ];
 
     /**

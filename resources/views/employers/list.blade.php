@@ -37,7 +37,13 @@
       {{-- Jobs --}}
       <div class="">
         @foreach ($employers as $employer)
-          @isset($employer->company_name)
+          @php
+            $show = true;
+            if (!$employer->company_name || !$employer->industry || !$employer->about || count($employer->jobPostings) < 1) {
+                $show = null;
+            }
+          @endphp
+          @isset($show)
             <div
               class="flex flex-col p-6 mb-4 bg-white rounded-md shadow-md md:flex-row md:justify-between md:items-center">
               <div class="flex">
@@ -59,7 +65,7 @@
               <div class="mt-2">
                 <div>
                   <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>
-                  {{ $employer->location->name }}
+                  {{ ucfirst($employer->location->name) }}
                 </div>
                 <div class="md:hidden">
                   <i class="mr-3 text-blue-400 fa-sharp fa-solid fa-industry"></i>

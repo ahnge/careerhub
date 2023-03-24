@@ -25,35 +25,31 @@ class JobSeekerController extends Controller
 
     public function update(Request $request)
     {
+        $job_seeker = $request->user()->jobSeeker;
+
+        $this->authorize('update', $job_seeker);
+
+        // Validate the request data
+        $validated = $request->validate([
+            'profile_img' => 'image|nullable',
+            'resume' => 'file|nullable',
+        ]);
+
         // Handle the job_seeker profile image
         if ($request->hasFile('profile_img')) {
-            // Ensure file type is valid
-            if (!MyHelper::validate_extension($request, 'profile_img', 'profile')) {
-                return Redirect::route('profile.edit')->with('status', 'error')->with('flash', 'Invalid file type!');
-            }
-
             $normalized_path = MyHelper::storeAndGetPath($request, 'images', 'profile_img');
 
-            // Save the path
-            $job_seeker = $request->user()->jobSeeker;
             $job_seeker->profile_img = $normalized_path;
-            $job_seeker->save();
         }
 
         // Handle the job_seeker's resume
         if ($request->hasFile('resume')) {
-            // Ensure file type is valid
-            if (!MyHelper::validate_extension($request, 'resume', 'resume')) {
-                return Redirect::route('profile.edit')->with('status', 'error')->with('flash', 'Invalid file type!');
-            }
-
             $normalized_path = MyHelper::storeAndGetPath($request, 'public/resumes', 'resume');
 
-            $job_seeker = $request->user()->jobSeeker;
             $job_seeker->resume = $normalized_path;
-            $job_seeker->save();
         }
 
+        $job_seeker->save();
 
         $status = 'success';
         $message = 'Profile updated successfully!';

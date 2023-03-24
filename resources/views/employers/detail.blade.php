@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
 
-  <div class="px-6 py-6 mx-auto max-w-7xl lg:px-8">
+  <div class="px-6 min-h-[80vh] py-6 mx-auto max-w-7xl lg:px-8">
     {{-- topper --}}
     <div
       class="flex flex-col items-center py-10 overflow-hidden bg-white border-b-4 border-blue-400 shadow-xl sm:flex-row px-7 sm:rounded-lg">
@@ -16,7 +16,7 @@
       <div class="mt-5 sm:mt-0 sm:ml-5">
         <div class="text-2xl font-bold">{{ $employer->company_name }}</div>
         <div class="mt-3 text-gray-500">
-          <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>{{ $employer->location->name }}
+          <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>{{ ucfirst($employer->location->name) }}
         </div>
         <div class="text-gray-500">
           <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $employer->industry->name }}
@@ -79,7 +79,7 @@
               <div class="flex justify-start w-full px-5 mt-5 border-t">
                 <div class="flex-1 py-3 text-center text-gray-400 border-r">
                   <i class="mr-3 text-blue-400 fa-solid fa-location-dot"></i>
-                  {{ $jobPosting->location->name }}
+                  {{ ucfirst($jobPosting->location->name) }}
                 </div>
                 <div class="flex-1 py-3 text-center text-gray-400">
                   <i class="mr-3 text-blue-400 fa-solid fa-clock"></i>
