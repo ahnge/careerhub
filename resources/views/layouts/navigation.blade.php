@@ -42,11 +42,6 @@
             </x-slot>
 
             <x-slot name="content">
-              @if (auth()->user()->type == 'job_seeker')
-                <x-dropdown-link :href="route('jobseeker.profile', auth()->user()->jobSeeker->id)">
-                  {{ __('Profile') }}
-                </x-dropdown-link>
-              @endif
               <x-dropdown-link :href="route('profile.edit')">
                 {{ __('Edit Profile') }}
               </x-dropdown-link>
@@ -114,11 +109,6 @@
         </div>
 
         <div class="mt-3 space-y-1">
-          @if (auth()->user()->type == 'job_seeker')
-            <x-responsive-nav-link :href="route('jobseeker.profile', auth()->user()->jobSeeker->id)">
-          @endif
-          {{ __('Real Profile') }}
-          </x-responsive-nav-link>
           <x-responsive-nav-link :href="route('profile.edit')">
             {{ __('Profile') }}
           </x-responsive-nav-link>

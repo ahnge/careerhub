@@ -12,17 +12,6 @@ use App\Helpers\MyHelper;
 
 class JobSeekerController extends Controller
 {
-    // Profile page of the jobseeker
-    public function profile(string $job_seeker_id): View
-    {
-        $job_seeker = JobSeeker::findOrFail($job_seeker_id);
-
-        $user = User::find($job_seeker->user_id);
-
-
-        return view('jobseekers.profile', ['user' => $user]);
-    }
-
     public function update(Request $request)
     {
         $job_seeker = $request->user()->jobSeeker;

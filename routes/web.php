@@ -28,7 +28,6 @@ Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employ
 Route::resource('jobpostings', JobPostingController::class);
 
 // Job Seekers
-Route::get('/jobseekers/{jobseeker}', [JobSeekerController::class, 'profile'])->name('jobseeker.profile');
 Route::patch('/jobseekers/{jobseeker}', [JobSeekerController::class, 'update'])->name('jobseeker.update');
 Route::get('/jobpostings/{jobposting}/applicants', [JobPostingController::class, 'viewApplicants'])->name('jobposting.applications');
 
