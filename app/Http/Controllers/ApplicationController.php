@@ -21,11 +21,17 @@ class ApplicationController extends Controller
             'job_posting_id' => 'required',
         ]);
 
+
         $job_seeker_id = (int)$validated['job_seeker_id'];
         $job_posting_id = (int)$validated['job_posting_id'];
 
         // Accounts type of job_seeker are authorized.
         $this->authorize('apply', Application::class);
+
+        // Get the jobposting
+        $jobposting = DB::table('job_postings')
+            ->where('id', '=', $job_posting_id)
+            ->first();
 
         // Ensure user has uploaded resume.
         if (!$request->user()->jobSeeker->resume) {
@@ -33,7 +39,7 @@ class ApplicationController extends Controller
             $message = 'Please upload your resume to apply!';
             Session::flash('flashes', [compact('status', 'message')]);
 
-            return redirect()->route('jobpostings.show', ['jobposting' => $job_posting_id]);
+            return redirect()->route('jobpostings.show', ['jobposting' => $jobposting->slug]);
         }
 
         // Ensure user has not been applied before.
@@ -47,7 +53,7 @@ class ApplicationController extends Controller
             $message = 'You have already applied!';
             Session::flash('flashes', [compact('status', 'message')]);
 
-            return redirect()->route('jobpostings.show', ['jobposting' => $job_posting_id]);
+            return redirect()->route('jobpostings.show', ['jobposting' => $jobposting->slug]);
         }
 
         // Create new application 
@@ -59,6 +65,6 @@ class ApplicationController extends Controller
 
         // Return with success
         Session::flash('flashes', [['status' => 'success', 'message' => 'Applied successfully!']]);
-        return redirect()->route('jobpostings.show', ['jobposting' => (int)$validated['job_posting_id']]);
+        return back();
     }
 }
