@@ -2,7 +2,7 @@
 @props(['flashes'])
 
 
-<div class="fixed z-50 right-10 top-20">
+<div class="fixed z-50 right-3 md:right-10 top-20">
   @foreach ($flashes as $flash)
     @php
       $classes = 'py-3 px-4 rounded';

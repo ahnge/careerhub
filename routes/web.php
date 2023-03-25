@@ -29,7 +29,7 @@ Route::resource('jobpostings', JobPostingController::class);
 
 // Job Seekers
 Route::patch('/jobseekers/{jobseeker}', [JobSeekerController::class, 'update'])->name('jobseeker.update');
-Route::get('/jobpostings/{jobposting}/applicants', [JobPostingController::class, 'viewApplicants'])->name('jobposting.applications');
+Route::get('/jobpostings/{jobposting:slug}/applicants', [JobPostingController::class, 'viewApplicants'])->name('jobposting.applications');
 
 // Employers
 Route::get('/companies', [EmployerController::class, 'index'])->name('employers.index');

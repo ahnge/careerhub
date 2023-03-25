@@ -62,7 +62,7 @@
           </div>
 
           <div class="w-full px-2 mb-4 md:w-1/2 md:mt-3 md:mb-0 md:relative">
-            <x-primary-button type='submit' class="-translate-x-1/2 md:absolute top-1/2 left-1/2">
+            <x-primary-button type='submit' class="md:-translate-x-1/2 md:absolute md:top-1/2 md:left-1/2">
               Search
             </x-primary-button>
           </div>
@@ -93,7 +93,7 @@
               <i class="text-blue-400 fa-solid fa-location-dot"></i>
               <div class="ml-3"> {{ ucfirst($jobPosting->employer->location->name) }}</div>
             </div>
-            <a href="{{ route('jobpostings.show', $jobPosting->id) }}" class="inline-block mt-5 btn btn-primary">
+            <a href="{{ route('jobpostings.show', $jobPosting->slug) }}" class="inline-block mt-5 btn btn-primary">
               <x-primary-button>View Detail</x-primary-button>
             </a>
           </div>
