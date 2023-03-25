@@ -33,8 +33,8 @@ Route::get('/jobpostings/{jobposting:slug}/applicants', [JobPostingController::c
 
 // Employers
 Route::get('/companies', [EmployerController::class, 'index'])->name('employers.index');
-Route::get('/companies/{employer}', [EmployerController::class, 'show'])->name('employers.show');
-Route::patch('/companies/{employer}', [EmployerController::class, 'update'])->name('employer.update');
+Route::get('/companies/{employer:slug}', [EmployerController::class, 'show'])->name('employers.show');
+Route::patch('/companies/{employer:slug}', [EmployerController::class, 'update'])->name('employer.update');
 
 // Applications
 Route::post('/apply', [ApplicationController::class, 'store'])->name('application.store');

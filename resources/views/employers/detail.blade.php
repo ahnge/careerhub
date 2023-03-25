@@ -55,7 +55,7 @@
                 @endif
               </div>
 
-              <a href="{{ route('jobpostings.show', $jobPosting->id) }}">
+              <a href="{{ route('jobpostings.show', $jobPosting->slug) }}">
                 <h1 class="mt-3 text-xl font-bold transition-colors hover:text-blue-400">
                   {{ $jobPosting->title }}
                 </h1>

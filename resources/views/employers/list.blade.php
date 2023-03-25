@@ -53,7 +53,7 @@
                   </div>
                 @endif
                 <div class="flex flex-col justify-center">
-                  <a href="{{ route('employers.show', $employer->id) }}" class="transition-colors hover:text-blue-400">
+                  <a href="{{ route('employers.show', $employer->slug) }}" class="transition-colors hover:text-blue-400">
                     <h3 class="mb-2 text-xl font-semibold md:mb-0">{{ $employer->company_name }}</h3>
                   </a>
                   <div class="hidden md:block">

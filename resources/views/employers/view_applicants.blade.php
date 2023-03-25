@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
 
-  <div class="py-12">
+  <div class="py-12 min-h-[80vh]">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class="p-6 flex justify-between">
@@ -33,8 +33,7 @@
                   @foreach ($applicants as $applicant)
                     <tr>
                       <td class="px-4 py-2 border">
-                        <a class="text-indigo-500 hover:text-indigo-700"
-                          href="{{ route('jobseeker.profile', $applicant->id) }}">{{ ucfirst($applicant->user->name) }}</a>
+                        {{ ucfirst($applicant->user->name) }}
                       </td>
                       <td class="px-4 py-2 border">
                         {{ $applicant->user->email }}

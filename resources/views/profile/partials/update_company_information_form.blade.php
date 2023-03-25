@@ -13,7 +13,7 @@
     @csrf
   </form>
 
-  <form method="post" action="{{ route('employer.update', $user->employer->id) }}" enctype="multipart/form-data"
+  <form method="post" action="{{ route('employer.update', $user->employer->slug) }}" enctype="multipart/form-data"
     class="mt-6 space-y-6">
     @csrf
     @method('patch')

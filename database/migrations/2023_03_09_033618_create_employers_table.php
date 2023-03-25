@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('industry_id')->nullable();
             $table->string('company_name')->nullable();
+            $table->string('slug')->unique();
             $table->string('company_logo')->nullable();
             $table->text('about')->nullable();
             $table->timestamps();

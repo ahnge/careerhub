@@ -12,7 +12,7 @@
       class="relative flex flex-col items-center py-10 overflow-hidden bg-white border-b-4 border-blue-400 shadow-xl sm:flex-row px-7 sm:rounded-lg">
 
       @if ($jobPosting->employer->company_logo)
-        <a href="{{ route('employers.show', $jobPosting->employer->id) }}">
+        <a href="{{ route('employers.show', $jobPosting->employer->slug) }}">
           <img src="{{ asset($jobPosting->employer->company_logo) }}" alt="{{ $jobPosting->employer->company_name }}"
             class="w-32 h-32 aspect-square">
         </a>
@@ -25,7 +25,7 @@
 
       <div class="mt-5 sm:mt-0 sm:ml-5">
         <div class="text-2xl font-bold">{{ $jobPosting->title }}</div>
-        <a href="{{ route('employers.show', $jobPosting->employer->id) }}">
+        <a href="{{ route('employers.show', $jobPosting->employer->slug) }}">
           <div class="mt-2 text-xl font-bold hover:text-blue-400">{{ $jobPosting->employer->company_name }}</div>
         </a>
         <div class="mt-3 text-gray-500">
@@ -102,7 +102,7 @@
                 @endif
               </div>
 
-              <a href="{{ route('jobpostings.show', $relatedJobPosting->id) }}">
+              <a href="{{ route('jobpostings.show', $relatedJobPosting->slug) }}">
                 <h1 class="mt-3 text-xl font-bold transition-colors hover:text-blue-400">
                   {{ $relatedJobPosting->title }}
                 </h1>
