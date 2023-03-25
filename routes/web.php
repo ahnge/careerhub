@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 // Job Postings
 Route::get('/admin', [JobPostingController::class, 'admin'])->middleware('employer')->name('jobpostings.admin');
-Route::resource('jobpostings', JobPostingController::class);
+Route::resource('jobpostings', JobPostingController::class)->parameter('jobposting', 'jobposting:slug');
 
 // Job Seekers
 Route::patch('/jobseekers/{jobseeker}', [JobSeekerController::class, 'update'])->name('jobseeker.update');

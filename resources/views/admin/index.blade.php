@@ -30,7 +30,7 @@
                     <td class="px-4 py-2 border">{{ $jobPosting->title }}</td>
                     <td class="px-4 py-2 border">
                       <a class="text-indigo-500 hover:text-indigo-700"
-                        href="{{ route('jobpostings.show', $jobPosting->id) }}">Detail</a>
+                        href="{{ route('jobpostings.show', $jobPosting->slug) }}">Detail</a>
                     </td>
                     <td class="px-4 py-2 border">
                       @if (count($jobPosting->applicants) > 0)
@@ -38,16 +38,17 @@
                           $count = count($jobPosting->applicants);
                         @endphp
                         <a class="text-indigo-500 hover:text-indigo-700"
-                          href="{{ route('jobposting.applications', $jobPosting->id) }}">See all {{ $count }}
+                          href="{{ route('jobposting.applications', $jobPosting->slug) }}">See all {{ $count }}
                           Applicants</a>
                       @else
                         <p>No applicants yet</p>
                       @endif
                     </td>
                     <td class="px-4 py-2 border">
-                      <a href="{{ route('jobpostings.edit', $jobPosting->id) }}"
+                      <a href="{{ route('jobpostings.edit', $jobPosting->slug) }}"
                         class="mr-2 text-indigo-500 hover:text-indigo-700">Edit</a>
-                      <form action="{{ route('jobpostings.destroy', $jobPosting->id) }}" method="POST" class="inline">
+                      <form action="{{ route('jobpostings.destroy', $jobPosting->slug) }}" method="POST"
+                        class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
