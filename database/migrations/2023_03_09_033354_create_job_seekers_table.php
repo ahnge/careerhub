@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('resume')->nullable();
             $table->string('profile_img')->nullable();
+            $table->string('linkedin_url')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();

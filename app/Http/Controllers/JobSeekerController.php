@@ -22,6 +22,7 @@ class JobSeekerController extends Controller
         $validated = $request->validate([
             'profile_img' => 'image|nullable',
             'resume' => 'file|nullable',
+            'linkedin_url' => 'url|nullable',
         ]);
 
         // Handle the job_seeker profile image
@@ -36,6 +37,11 @@ class JobSeekerController extends Controller
             $normalized_path = MyHelper::storeAndGetPath($request, 'public/resumes', 'resume');
 
             $job_seeker->resume = $normalized_path;
+        }
+
+        // Handle the job_seeker's linkedin
+        if ($request->linkedin_url) {
+            $job_seeker->linkedin_url = $validated['linkedin_url'];
         }
 
         $job_seeker->save();

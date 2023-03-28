@@ -19,7 +19,6 @@
               <thead>
                 <tr class="text-left">
                   <th class="px-4 py-2">Title</th>
-                  <th class="px-4 py-2">Detail</th>
                   <th class="px-4 py-2">Applicants</th>
                   <th class="px-4 py-2">Actions</th>
                 </tr>
@@ -27,10 +26,11 @@
               <tbody>
                 @foreach ($jobPostings as $jobPosting)
                   <tr>
-                    <td class="px-4 py-2 border">{{ $jobPosting->title }}</td>
                     <td class="px-4 py-2 border">
                       <a class="text-indigo-500 hover:text-indigo-700"
-                        href="{{ route('jobpostings.show', $jobPosting->slug) }}">Detail</a>
+                        href="{{ route('jobpostings.show', $jobPosting->slug) }}">
+                        {{ $jobPosting->title }}
+                      </a>
                     </td>
                     <td class="px-4 py-2 border">
                       @if (count($jobPosting->applicants) > 0)

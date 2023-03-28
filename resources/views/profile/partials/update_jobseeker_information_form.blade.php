@@ -38,6 +38,14 @@
       <x-text-input id="resume" name="resume" type="file" class="block w-full mt-1" />
       <x-input-error class="mt-2" :messages="$errors->get('resume')" />
     </div>
+
+    <div>
+      <x-input-label for="linkedin_url" :value="__('Linkedin')" />
+      <x-text-input id="linkedin_url" name="linkedin_url" value="{{ $user->jobSeeker->linkedin_url ?? null }}"
+        type="text" class="block w-full mt-1" />
+      <x-input-error class="mt-2" :messages="$errors->get('linkedin_url')" />
+    </div>
+
     <div class="flex items-center gap-4">
       <x-primary-button type='submit'>{{ __('Save') }}</x-primary-button>
     </div>

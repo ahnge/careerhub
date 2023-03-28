@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             ->for(User::factory()->state([
                 'name' => 'luke',
                 'email' => 'l@l.com',
-                'type' => 'job_seeker'
+                'type' => 'job_seeker',
             ]))
             ->create();
     }
