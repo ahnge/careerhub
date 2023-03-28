@@ -20,17 +20,15 @@ class CreateJobSeekerOrEmployer
     }
 
     /**
-     * Handle the event.
+     * Handle the event. by creating a job seeker or employer.
      */
     public function handle(Registered $event): void
     {
-        //
         if ($event->user->type == 'job_seeker') {
-            # code..
             $job_seeker = new JobSeeker;
             $job_seeker->user_id = $event->user->id;
             $job_seeker->save();
-        } else {
+        } else if ($event->user->type == 'employer') {
             $employer = new Employer;
             $employer->user_id = $event->user->id;
             $employer->save();

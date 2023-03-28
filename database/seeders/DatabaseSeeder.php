@@ -44,23 +44,6 @@ class DatabaseSeeder extends Seeder
             ->for($yangon)
             ->create();
 
-        $admin1 = User::factory()
-            ->state([
-                'name' => 'admin1',
-                'email' => 'b@b.com',
-                'type' => 'employer'
-            ]);
-
-        $mandalay = Location::factory()->state(['name' => 'mandalay']);
-
-        Employer::factory()->has(
-            JobPosting::factory()->for($mandalay)
-                ->count(10)
-        )
-            ->count(1)
-            ->for($admin1)
-            ->for($mandalay)
-            ->create();
 
         JobSeeker::factory()
             ->count(1)
@@ -69,6 +52,9 @@ class DatabaseSeeder extends Seeder
                 'email' => 'l@l.com',
                 'type' => 'job_seeker',
             ]))
+            ->state([
+                'linkedin_url' => 'https://www.linkedin.com/in/nayzaw-minnaing/',
+            ])
             ->create();
     }
 }

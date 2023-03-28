@@ -20,7 +20,7 @@ class JobPostingFactory extends Factory
 
         return [
             'title' => fake()->name(),
-            'description' => fake()->text(200),
+            'description' => "This is a fake job created to test the application.",
             'requirements' => fake()->text(),
             'type' => $random > 0 ? 'remote' : 'on_site',
             'time' => $random > 0 ? 'full_time' : 'part_time',
