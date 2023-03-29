@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('requirements');
             $table->enum('type', ['remote', 'on_site']);
             $table->enum('time', ['full_time', 'part_time']);
-            $table->decimal('salary', 8, 2)->nullable();
+            $table->integer('salary', false, true)->nullable();
             $table->integer('post', false, true);
             $table->string('slug')->unique();
             $table->timestamps();
