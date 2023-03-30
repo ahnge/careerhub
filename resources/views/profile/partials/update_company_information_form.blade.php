@@ -29,10 +29,10 @@
       <div class="flex items-center mt-3">
         @if ($user->employer->company_logo)
           <img src="{{ asset($user->employer->company_logo) }}" alt="{{ $user->employer->company_name }}'s logo"
-            class="inline max-w-[4rem] rounded-full mr-4">
+            class="inline aspect-square max-w-[4rem] rounded-full mr-4">
         @else
           <img src="{{ asset('images/default_profile.svg') }}" alt="{{ $user->employer->company_name }}'s logo"
-            class="inline max-w-[4rem] rounded-full mr-4">
+            class="inline aspect-square max-w-[4rem] rounded-full mr-4">
         @endif
         <x-text-input id="company_logo" name="company_logo" type="file" class="block w-full mt-1" />
       </div>

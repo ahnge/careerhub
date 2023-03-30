@@ -10,8 +10,7 @@
     <div
       class="flex flex-col items-center py-10 overflow-hidden bg-white border-b-4 border-blue-400 shadow-xl sm:flex-row px-7 sm:rounded-lg">
       @if ($employer->company_logo)
-        <img src="{{ asset($employer->company_logo) }}" alt="{{ $employer->company_name }}"
-          class="w-32 h-32 aspect-square">
+        <img src="{{ asset($employer->company_logo) }}" alt="{{ $employer->company_name }}" class="w-32 aspect-auto">
       @endif
       <div class="mt-5 sm:mt-0 sm:ml-5">
         <div class="text-2xl font-bold">{{ $employer->company_name }}</div>
@@ -44,7 +43,7 @@
           @foreach ($employer->jobPostings as $jobPosting)
             <div class="relative flex flex-col items-center pt-5 bg-white border-b-4 border-blue-400 shadow-lg">
               @if ($employer->company_logo)
-                <img src="{{ asset($employer->company_logo) }}" class="max-w-[4rem]" alt="Company Logo">
+                <img src="{{ asset($employer->company_logo) }}" class="max-w-[4rem] aspect-auto" alt="Company Logo">
               @endif
 
               <div class="absolute right-0 px-3 py-1 text-blue-600 bg-blue-100 top-5">
@@ -61,7 +60,7 @@
                 </h1>
               </a>
 
-              <div class="text-gray-500 mt-3">
+              <div class="mt-3 text-gray-500">
                 <i class="mr-3 text-blue-400 fa-solid fa-industry"></i>{{ $jobPosting->industry->name }}
               </div>
               <div class="text-gray-500">

@@ -48,7 +48,7 @@
               class="flex flex-col p-6 mb-4 bg-white rounded-md shadow-md md:flex-row md:justify-between md:items-center">
               <div class="flex">
                 @if ($employer->company_logo)
-                  <div class=" max-w-[3rem] md:max-w-[5rem] aspect-square mr-4">
+                  <div class=" max-w-[3rem] md:max-w-[5rem] aspect-auto mr-4">
                     <img src="{{ $employer->company_logo }}" alt="Company Logo Image">
                   </div>
                 @endif
