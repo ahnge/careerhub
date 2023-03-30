@@ -49,7 +49,7 @@
               <div class="flex">
                 @if ($employer->company_logo)
                   <div class=" max-w-[3rem] md:max-w-[5rem] aspect-auto mr-4">
-                    <img src="{{ $employer->company_logo }}" alt="Company Logo Image">
+                    <img src="{{ Storage::disk('s3')->url($employer->company_logo) }}" alt="Company Logo Image">
                   </div>
                 @endif
                 <div class="flex flex-col justify-center">

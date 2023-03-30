@@ -13,8 +13,8 @@
 
       @if ($jobPosting->employer->company_logo)
         <a href="{{ route('employers.show', $jobPosting->employer->slug) }}">
-          <img src="{{ asset($jobPosting->employer->company_logo) }}" alt="{{ $jobPosting->employer->company_name }}"
-            class="w-32 aspect-auto">
+          <img src="{{ Storage::disk('s3')->url($jobPosting->employer->company_logo) }}"
+            alt="{{ $jobPosting->employer->company_name }}" class="w-32 aspect-auto">
         </a>
       @endif
 
@@ -90,8 +90,8 @@
           @foreach ($relatedJobPostings as $relatedJobPosting)
             <div class="relative flex flex-col items-center pt-5 pb-16 bg-white border-b-4 border-blue-400 shadow-lg">
               @if ($relatedJobPosting->employer->company_logo)
-                <img src="{{ asset($relatedJobPosting->employer->company_logo) }}" class="max-w-[4rem] aspect-auto"
-                  alt="Company Logo">
+                <img src="{{ Storage::disk('s3')->url($relatedJobPosting->employer->company_logo) }}"
+                  class="max-w-[4rem] aspect-auto" alt="Company Logo">
               @endif
 
               <div class="absolute right-0 px-3 py-1 text-blue-600 bg-blue-100 top-5">
