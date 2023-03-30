@@ -2,8 +2,8 @@
 <tr>
   <td class="header">
     <a href="{{ $url }}" style="display: inline-block;">
-      @if (trim($slot) === 'Jobboard')
-        <img src="{{ asset('images/jobboard.svg') }}" class="logo" alt="Job Board Logo">
+      @if (trim($slot) === 'Careerhub')
+        <img src="{{ Storage::disk('s3')->url('images/careerhub.svg') }}" class="logo" alt="CareerHub Logo">
       @else
         {{ $slot }}
       @endif
