@@ -26,7 +26,7 @@ Careerhub is a job portal web application developed using Laravel framework. The
 
 ## Installation
 
-1.  Clone the repository to your local machine using `git clone https://github.com/yourusername/careerhub.git`
+1.  Clone the repository to your local machine using `git clone https://github.com/ahnge/careerhub.git`
 2.  Change to the project directory using `cd careerhub`
 3.  Run `composer install` to install the project dependencies
 4.  Create a `.env` file by copying the `.env.example` file using the command `cp .env.example .env`
