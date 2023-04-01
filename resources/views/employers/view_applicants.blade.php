@@ -51,7 +51,7 @@
                         </td>
                       @endif
                       <td class="px-4 py-2 text-right border">
-                        <a href="{{ Storage::url($applicant->resume) }}"
+                        <a href="{{ Storage::disk('s3')->url($applicant->resume) }}"
                           download="{{ $applicant->user->name }}'s_resume"
                           class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                           Download Resume
