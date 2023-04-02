@@ -18,6 +18,8 @@ Careerhub is a job portal web application developed using Laravel framework. The
 -   MySQL server
 -   Amazon S3 bucket for storing images and resumes
 
+## [VIDEO DEMO](https://youtu.be/TrrCWuIUeb8)
+
 ## Requirements
 
 -   PHP 7.3 or higher
