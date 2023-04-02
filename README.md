@@ -1,8 +1,20 @@
 # Careerhub - CS50 Final Project
 
-## Description
+#### Video Demo: <https://youtu.be/TrrCWuIUeb8>
 
-Careerhub is a job portal web application developed using Laravel framework. The project is hosted on AWS EC2 instance with LAMP stack and MySQL server. The project also includes Amazon S3 bucket for storing images and resumes. The application allows users to create two types of accounts (employer and job_seeker). Employers can create job postings and job_seekers can apply to the job postings. Employers can see job_seekers who apply to their job postings.
+#### Description:
+
+Careerhub is a job portal web application developed using the Laravel framework as a final project for the CS50 course. The application allows employers to create job postings and job seekers to apply to those postings. The project also includes an Amazon S3 bucket for storing images and resumes.
+
+The application is hosted on an AWS EC2 instance with LAMP stack and MySQL server, providing a robust and scalable infrastructure for managing large numbers of job postings and job seekers. The project uses the Model-View-Controller (MVC) architecture to separate concerns and ensure maintainability and scalability.
+
+Careerhub includes two types of accounts: employer and job_seeker. Employers can create job postings, which include the job title, description, and requirements. Job_seekers can apply to job postings by submitting their resume and a brief cover letter.
+
+Employers can view the list of job_seekers who have applied to their job postings and can communicate with them.
+
+The project leverages the power of the Laravel framework, which provides a rich set of features and tools for web application development. It includes robust validation rules, an authentication system, and a flexible database migration system.
+
+In conclusion, Careerhub is a sophisticated job portal web application that provides an intuitive and user-friendly interface for employers and job seekers. It leverages the power of Laravel and AWS infrastructure to provide a scalable and robust platform for managing job postings and applications.
 
 ## Features
 
