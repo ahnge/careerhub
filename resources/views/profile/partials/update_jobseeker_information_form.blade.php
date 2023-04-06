@@ -25,7 +25,7 @@
           <img src="{{ Storage::disk('s3')->url($user->jobSeeker->profile_img) }}" alt="{{ $user->name }}'s logo"
             class="inline aspect-square max-w-[4rem] rounded-full mr-4">
         @else
-          <img src="{{ Storage::disk('s3')->url('images/default_profile.svg') }}" alt="{{ $user->name }}'s logo"
+          <img src="{{ asset('default_profile.png')}}" alt="{{ $user->name }}'s logo"
             class="inline aspect-square max-w-[4rem] rounded-full mr-4">
         @endif
         <x-text-input id="profile_img" name="profile_img" type="file" class="block w-full mt-1" />

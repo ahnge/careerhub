@@ -32,7 +32,7 @@
             alt="{{ $user->employer->company_name }}'s logo"
             class="inline aspect-square max-w-[4rem] rounded-full mr-4">
         @else
-          <img src="{{ Storage::disk('s3')->url('images/default_profile.svg') }}"
+          <img src="{{ asset("default_profile.png")}}"
             alt="{{ $user->employer->company_name }}'s logo"
             class="inline aspect-square max-w-[4rem] rounded-full mr-4">
         @endif

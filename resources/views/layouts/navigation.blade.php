@@ -6,7 +6,7 @@
         <!-- Logo -->
         <div class="flex items-center shrink-0">
           <a href="{{ route('jobpostings.index') }}" class="max-w-[3rem]">
-            <img src="{{ Storage::disk('s3')->url('images/careerhub.svg') }}" alt="logo">
+            <img src="{{ asset('careerhub.svg')}}" alt="logo">
           </a>
 
         </div>

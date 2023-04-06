@@ -9,7 +9,7 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   {{-- Favicon --}}
-  <link rel="shortcut icon" href="{{ Storage::disk('s3')->url('images/careerhub.svg') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('careerhub.ico')}}" type="image/x-icon">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
