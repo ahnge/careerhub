@@ -51,3 +51,6 @@ In conclusion, Careerhub is a sophisticated job portal web application that prov
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+## IMPORTANT!!
+This project hasn’t been touched for quite some time now, and most of its dependencies are outdated and may contain security vulnerabilities.
+
